@@ -542,13 +542,28 @@ html,body{
   .doli-copy-logo{height:16px}
 }
 
-.doli-copy span {
+/* .doli-copy span {
   background: linear-gradient(90deg, var(--brand1), var(--brand2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+} */
+
+.doli-copy span {
+  background: linear-gradient(90deg, #00A8B5, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text; /* Firefox support */
+  -moz-text-fill-color: transparent; /* Firefox support */
+  display: inline-block;
+  font-size: 15px;
 }
 
+
+.doli-support .fa-phone {
+  color: #000 !important;
+  opacity: 1 !important; /* Match your brand1 color, adjust as needed */
+}
 </style>
 
 
@@ -728,15 +743,20 @@ if (is_readable($brandLogoPath)) {
 ?>
 <div class="doli-support">
   <!-- tiny headset icon (inline SVG so no extra file needed) -->
-  <svg class="icon-16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M12 2a8 8 0 0 0-8 8v6a3 3 0 0 0 3 3h2v-6H7v-3a5 5 0 1 1 10 0v3h-2v6h2a3 3 0 0 0 3-3v-6a8 8 0 0 0-8-8zM9 20h6v2H9z"/>
-  </svg>
+  <i class="fa-solid fa-phone" style="color:#000000"></i>
   <span>Need help? <a href="/dolibarr/public/ticket/index.php?entity=1" target="_blank" rel="noopener">Contact Support</a></span>
 </div>
 
 
-<div class="doli-copy">
+<!-- <div class="doli-copy">
   &copy; 2025 by <span style="background: linear-gradient(90deg, #0f8ea8, #1178d1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Realcore Solutions</span>. All Rights Reserved.
+  <a class="doli-copy-brand" href="https://realcoresolutions.com" target="_blank" rel="noopener">
+    <span class="sr-only"></span>
+  </a>
+</div> -->
+
+<div class="doli-copy">
+  &copy; 2025 by <span>Realcore Solutions</span>. All Rights Reserved.
   <a class="doli-copy-brand" href="https://realcoresolutions.com" target="_blank" rel="noopener">
     <span class="sr-only"></span>
   </a>

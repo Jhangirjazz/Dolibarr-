@@ -15,9 +15,9 @@ print '
 <style>
 :root{
   --brand1:#0f8ea8; --brand2:#1178d1;
-  --ink:#171a1f; --muted:#6b7280; --bg:#f7f8fb;
-  --card:#ffffff; --ring:rgba(17,120,209,.18);
-  --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
+  // --ink:#171a1f; --muted:#6b7280; --bg:#f7f8fb;
+  // --card:#ffffff; --ring:rgba(17,120,209,.18);
+  // --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
 }
 
 html,body{
@@ -69,6 +69,7 @@ body.bodylogin {
   position: relative;
 }
 .doli-left-inner{
+  
   max-width:560px;width:100%;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
@@ -87,6 +88,7 @@ body.bodylogin {
 /* AMLAK mark */
 .doli-brandmark{margin:8px 0 6px}
 .doli-brandmark img{
+ margin-top: 38px;
   height:500px;
   width:auto;max-width:100%;
 }
@@ -101,7 +103,7 @@ body.bodylogin {
 .doli-social {
   position: absolute;
   left: 50%;
-  bottom: 24px;
+  bottom: -18px;
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
@@ -145,7 +147,7 @@ body.bodylogin {
 .doli-support{
   position:absolute;
   left:50%; transform:translateX(-50%);
-  bottom:54px;
+  bottom:12px;
   display:flex; align-items:center; justify-content:center;
   gap:8px; color:var(--muted); font-size:14px
 }
@@ -162,7 +164,7 @@ body.bodylogin {
    position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom:24px;
+  bottom:-19px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -212,7 +214,7 @@ body.login-page{
   padding:clamp(24px,4vw,40px);
 }
 .doli-hello{margin:0 0 4px;
-font-size: 33px;
+font-size: 30px;
 padding-left: 25px;
 font-weight: bold;
 }
@@ -238,7 +240,7 @@ font-weight:500
 
 .doli-cta{margin-top:18px}
 .doli-btn{
-  width:100%;border:0;padding:14px 18px;border-radius:12px;font-weight:700;font-size:16px;color:#fff;
+  width:100%;border:0;padding:11px 18px;border-radius:12px;font-weight:700;font-size:16px;color:#fff;
   background-image:linear-gradient(90deg,var(--brand1),var(--brand2));
   transition:transform .06s,filter .15s,box-shadow .15s
 }
@@ -304,7 +306,7 @@ font-weight:500
   }
 
   .doli-input{padding:14px 16px;font-size:15px}
-  .doli-btn{padding:14px;font-size:15px}
+  .doli-btn{padding:14px;font-size:16px}
 }
 
 @media (max-width:360px){
@@ -352,6 +354,7 @@ font-weight:500
 .doli-copy,
 .doli-help,
 .doli-sub {
+
   color: #000000 !important; /* Force black color */
 }
 
@@ -362,6 +365,7 @@ font-weight:500
 
 /* Make the "Password forgotten?" link black too */
 .doli-row a {
+  font-size: 14px;
   color: #000000 !important;
   text-decoration: none;
 }
@@ -372,21 +376,27 @@ font-weight:500
 }
 
 .login {
-    padding-top: 58px;
+    padding-top: 46px;
 }
 
 .doli-copy span {
-  background: linear-gradient(90deg, var(--brand1), var(--brand2));
+margin-bottom: 2px;
+  background: linear-gradient(90deg, #00A8B5, blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -moz-background-clip: text; /* Firefox support */
+  -moz-text-fill-color: transparent; /* Firefox support */
   display: inline-block;
+  font-size: 15px;
 }
 
 input:not([type=checkbox], [type=radio]), select, textarea {
     height: 50px;
     margin-bottom: var(--spacing);
 }
-
+.doli-support .fa-phone {
+  color: #000000 !important;
+}
 </style>
 ';
 ?>
@@ -466,14 +476,12 @@ input:not([type=checkbox], [type=radio]), select, textarea {
         </p>
 
         <div class="doli-support">
-          <svg class="icon-16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2a8 8 0 0 0-8 8v6a3 3 0 0 0 3 3h2v-6H7v-3a5 5 0 1 1 10 0v3h-2v6h2a3 3 0 0 0 3-3v-6a8 8 0 0 0-8-8zM9 20h6v2H9z"/>
-          </svg>
+          <i class="fa-solid fa-phone" style="color: #000000;"></i>
           <span>Need help? <a href="/dolibarr/public/ticket/index.php?entity=1" target="_blank" rel="noopener">Contact Support</a></span>
         </div>
 
-        <div class="doli-copy">
-  &copy; 2025 by <span style="background: linear-gradient(90deg, #0f8ea8, #1178d1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Realcore Solutions</span>. All Rights Reserved.
+      <div class="doli-copy">
+  &copy; 2025 by <span>Realcore Solutions</span>. All Rights Reserved.
   <a class="doli-copy-brand" href="https://realcoresolutions.com" target="_blank" rel="noopener">
     <span class="sr-only"></span>
   </a>
