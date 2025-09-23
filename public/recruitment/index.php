@@ -337,18 +337,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(centeredLogo) centeredLogo.style.display='none';
 
   /* insert contact topbar once */
-  if(!document.querySelector('.rc-topbar')){
-      const topbar=document.createElement('div');
-      topbar.className='rc-topbar';
-      topbar.style.cssText=
-          'font-size:13px;line-height:1;color:#1f2937;background:#f8fafc;border-bottom:1px solid #e5e7eb;display:flex;gap:18px;align-items:center;justify-content:flex-end;padding:8px 16px;';
-      topbar.innerHTML=
-          '<a href="mailto:connect@realcoresolutions.com" style="color:#1f2937;text-decoration:none">connect@realcoresolutions.com</a>'+
-          '<span>+92&nbsp;309&nbsp;8882727</span>'+
-          '<span>+92&nbsp;21&nbsp;34507271</span>'+
-          '<span style="margin-left:auto"><a href="/support">Support</a>&nbsp;|&nbsp;<a href="<?php echo DOL_URL_ROOT; ?>/index.php">Login</a></span>';
-      headerBand.parentNode.insertBefore(topbar,headerBand);
-  }
+//   if(!document.querySelector('.rc-topbar')){
+//       const topbar=document.createElement('div');
+//       topbar.className='rc-topbar';
+//       topbar.style.cssText=
+//           'font-size:13px;line-height:1;color:#1f2937;background:#f8fafc;border-bottom:1px solid #e5e7eb;display:flex;gap:18px;align-items:center;justify-content:flex-end;padding:8px 16px;';
+//       topbar.innerHTML=
+//           '<a href="mailto:connect@realcoresolutions.com" style="color:#1f2937;text-decoration:none">connect@realcoresolutions.com</a>'+
+//           '<span>+92&nbsp;309&nbsp;8882727</span>'+
+//           '<span>+92&nbsp;21&nbsp;34507271</span>'+
+//           '<span style="margin-left:auto"><a href="/support">Support</a>&nbsp;|&nbsp;<a href="<?php echo DOL_URL_ROOT; ?>/index.php">Login</a></span>';
+//       headerBand.parentNode.insertBefore(topbar,headerBand);
+//   }
 
   /* scrub any “powered by” residue */
   document.querySelectorAll('.onlinepoweredby,.poweredby,[class*=poweredby],[id*=poweredby]')

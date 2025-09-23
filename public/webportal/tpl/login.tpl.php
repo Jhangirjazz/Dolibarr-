@@ -391,13 +391,41 @@ margin-bottom: 2px;
 }
 
 input:not([type=checkbox], [type=radio]), select, textarea {
+    color: black;
     height: 35px;
     margin-bottom: var(--spacing);
 }
 .doli-support .fa-phone {
   color: #000000 !important;
 }
+
+/* Password toggle icon styling */
+.password-toggle {
+  position: absolute;
+  right: 14px; /* Aligns with padding of doli-input */
+  top: 38%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #000000; /* Matches your black text theme */
+  font-size: 16px;
+  padding: 5px;
+  transition: color 0.15s;
+}
+
+.password-toggle:hover {
+  color: #666; /* Slightly lighter on hover for contrast */
+}
+
+.doli-input-wrap {
+  position: relative; /* Ensure this is relative for absolute positioning of the toggle */
+}
+
+ Ensure the input doesnt overlap with the icon
+.doli-input {
+  padding-right: 44px; /* Extra padding to accommodate the icon */
+}
 </style>
+
 ';
 ?>
 <body class="body bodylogin">
@@ -454,8 +482,10 @@ input:not([type=checkbox], [type=radio]), select, textarea {
         <div class="doli-field">
           <label class="doli-label" for="password"><?php echo $langs->trans("Password"); ?></label>
           <div class="doli-input-wrap">
-            <!-- <i class="login__icon fas fa-lock"></i> -->
             <input class="doli-input" type="password" id="password" name="password" placeholder="<?php print dol_escape_htmltag($langs->trans('Password')) ?>">
+            <span class="password-toggle" id="togglepassword">
+              <i class="fa-solid fa-eye"></i>
+            </span>
           </div>
         </div>
         <div class="doli-row">
@@ -488,6 +518,21 @@ input:not([type=checkbox], [type=radio]), select, textarea {
 </div>
       </form>
     </div>
+  <!-- Add the script here -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const togglePassword = document.querySelector('#togglepassword');
+  const passwordInput = document.querySelector('#password');
+
+  togglePassword.addEventListener('click', function () {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    const icon = this.querySelector('i');
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
+  });
+});
+</script>
   </section>
 </div>
 </body>
