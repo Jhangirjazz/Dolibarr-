@@ -229,7 +229,7 @@ html,body{
 
 /* Page background image */
 .body.bodylogin{
-  background:url('<?php echo DOL_URL_ROOT; ?>/custom/mybrand/img/background.jpg')
+  background:url('<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/background icon.jpg')
              center center / cover no-repeat fixed !important;
 }
 
@@ -558,11 +558,34 @@ html,body{
   display: inline-block;
   font-size: 15px;
 }
-
-
 .doli-support .fa-phone {
   color: #000 !important;
   opacity: 1 !important; /* Match your brand1 color, adjust as needed */
+}
+/* Password toggle icon styling */
+.password-toggle {
+  position: absolute;
+  right: 14px; /* Aligns with padding of doli-input */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280; /* Matches muted color variable */
+  font-size: 16px;
+  padding: 5px;
+  transition: color 0.15s;
+}
+
+.password-toggle:hover {
+  color: #171a1f; /* Darker color on hover */
+}
+
+.doli-input-wrap {
+  position: relative; /* Ensure this is relative for absolute positioning of the toggle */
+}
+
+/* Ensure the input doesn't overlap with the icon */
+.doli-input {
+  padding-right: 44px; /* Extra padding to accommodate the icon */
 }
 </style>
 
@@ -579,6 +602,22 @@ $(document).ready(function () {
 		?>$('#<?php echo $focus_element; ?>').focus(); <?php
 	} ?>		// Warning to use this only on visible element
 });
+
+$(document).ready(function () {
+  /* Set focus on correct field */
+  <?php if ($focus_element) { ?>
+    $('#<?php echo $focus_element; ?>').focus();
+  <?php } ?>
+
+  // Password toggle functionality
+  $('#togglepassword').on('click', function () {
+    var passwordInput = $('#password');
+    var type = passwordInput.attr('type') === 'password' ? 'text' : 'password';
+    passwordInput.attr('type', type);
+    $(this).find('i').toggleClass('fa-eye fa-eye-slash'); // Switch between eye and eye-slash icons
+  });
+});
+
 </script>
 <?php } ?>
 
@@ -660,19 +699,20 @@ if (is_readable($brandLogoPath)) {
             </div>
           </div>
 
+
+          <!-- changes -->
           <div class="doli-field">
-            <label class="doli-label" for="password"><?php echo $langs->trans("Password"); ?></label>
-            <div class="doli-input-wrap">
-              <input class="doli-input" type="password" id="password" maxlength="128"
-                     placeholder="<?php echo $langs->trans("Password"); ?>" name="password"
-                     value="<?php echo dol_escape_htmltag($password); ?>" tabindex="2"
-                     autocomplete="<?php echo !getDolGlobalString('MAIN_LOGIN_ENABLE_PASSWORD_AUTOCOMPLETE') ? 'off' : 'on'; ?>">
-              <?php
-                include_once DOL_DOCUMENT_ROOT.'/core/lib/security2.lib.php';
-                print showEyeForField('togglepassword', 'password');
-              ?>
-            </div>
-          </div>
+  <label class="doli-label" for="password"><?php echo $langs->trans("Password"); ?></label>
+  <div class="doli-input-wrap">
+    <input class="doli-input" type="password" id="password" maxlength="128"
+           placeholder="<?php echo $langs->trans("Password"); ?>" name="password"
+           value="<?php echo dol_escape_htmltag($password); ?>" tabindex="2"
+           autocomplete="<?php echo !getDolGlobalString('MAIN_LOGIN_ENABLE_PASSWORD_AUTOCOMPLETE') ? 'off' : 'on'; ?>">
+    <span class="password-toggle" id="togglepassword">
+      <i class="fa-solid fa-eye"></i>
+    </span>
+  </div>
+</div>
         <?php } ?>
 
         <!-- Captcha (unchanged, from original) -->

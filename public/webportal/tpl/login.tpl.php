@@ -33,7 +33,7 @@ html,body{
 
 /* Page background image */
 body.bodylogin {
-  background:url("/public/mybrand/img/background.jpg")
+  background:url("/public/mybrand/img/background icon.jpg")
              center center / cover no-repeat fixed !important;
   margin: 0;
   padding: 0;
@@ -197,7 +197,7 @@ body.bodylogin {
   .doli-copy-logo{height:20px}
 }
 body.login-page{
-    background:url("/dolibarr/public/mybrand/img/check.jpg")
+    background:url("/dolibarr/public/mybrand/img/background icon.jpg")
              center no-repeat fixed !important;
 } 
 
