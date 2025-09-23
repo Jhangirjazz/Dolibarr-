@@ -215,11 +215,11 @@ body.login-page{
 }
 .doli-hello{margin:0 0 4px;
 font-size: 30px;
-padding-left: 25px;
+padding-left: 30px;
 font-weight: bold;
 }
 .doli-sub{ 
- padding-left: 25px;
+ padding-left: 30px;
 margin-bottom:-48px;color:var(--muted);
 font-weight:500
 }
@@ -391,7 +391,7 @@ margin-bottom: 2px;
 }
 
 input:not([type=checkbox], [type=radio]), select, textarea {
-    height: 50px;
+    height: 35px;
     margin-bottom: var(--spacing);
 }
 .doli-support .fa-phone {
