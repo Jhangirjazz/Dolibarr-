@@ -244,8 +244,6 @@ body{background:#f9fafb;}
         box-shadow:0 12px 28px rgba(0,0,0,.08);
     }
 }
-
-
 /* 2 ▸ make any non-card element (the tagline, <br>, etc.)
       occupy its own full row inside the .center flex-container */
 .center > :not(table){
@@ -311,6 +309,12 @@ table#dolpaymenttable > tbody > tr:first-child td{
 h1 {
 	position: relative;
     top: 50px;
+}
+
+.center > .opacitymedium {
+    color: #000000 !important;
+    opacity: 1 !important;
+
 }
 
 </style>
@@ -516,6 +520,7 @@ if (is_array($results)) {
 			$arrayofpostulatebutton[] = array(
 				'url' => '/public/recruitment/view.php?ref='.$object->ref,
 				'label' => $langs->trans('ApplyJobCandidature'),
+				//'label' => 'Apply Now',
 				'lang' => 'recruitment',
 				'perm' => true,
 				'enabled' => true,

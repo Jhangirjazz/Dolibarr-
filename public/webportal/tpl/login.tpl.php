@@ -6,18 +6,16 @@ if (empty($context) || !is_object($context)) {
 	print "Error, template page can't be called as URL";
 	exit(1);
 }
+
 '@phan-var-force Context $context';
 print '
+<link rel="icon" type="image/x-icon" href="/dolibarr/public/mybrand/img/test.ico">
 
-<!-- Load Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
 :root{
   --brand1:#0f8ea8; --brand2:#1178d1;
-  // --ink:#171a1f; --muted:#6b7280; --bg:#f7f8fb;
-  // --card:#ffffff; --ring:rgba(17,120,209,.18);
-  // --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
 }
 
 html,body{
@@ -27,18 +25,17 @@ html,body{
   font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Prevent scrollbars that might cause white space */
 }
 *{box-sizing:border-box}
 
 /* Page background image */
 body.bodylogin {
   background:url("/public/mybrand/img/background icon.jpg")
-             center center / cover no-repeat fixed !important;
+              center center / cover no-repeat fixed !important;
   margin: 0;
   padding: 0;
-  height: 100vh; /* Ensure full viewport height */
-  overflow: auto; /* Allow scrolling if needed */
+  height: 100vh;
+  overflow: auto;
 }
 
 /* ---------- Header logo (top-left) ---------- */
@@ -49,7 +46,7 @@ body.bodylogin {
 .doli-login-shell{
   display:grid;
   grid-template-columns:1fr 1fr;
-  min-height:100vh; /* Changed from 100dvh to 100vh for better compatibility */
+  min-height:100vh;
   position:relative;
 }
 .doli-login-shell::before{
@@ -69,37 +66,26 @@ body.bodylogin {
   position: relative;
 }
 .doli-left-inner{
-  
   max-width:560px;width:100%;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   gap:14px;
-  min-height: 100%; /* Changed from 60vh to 100% */
+  min-height: 100%;
 }
-
-/* Make the left section a positioning context */
 .doli-left{
   position:relative;
 }
-
-/* Hide legacy inline logo block above AMLAK text, if present */
 .doli-left .doli-logo{display:none}
-
-/* AMLAK mark */
 .doli-brandmark{margin:8px 0 6px}
 .doli-brandmark img{
- margin-top: 38px;
-  height:500px;
+  margin-top: 38px;
+  height:350px;
   width:auto;max-width:100%;
 }
-
-/* Tagline beneath AMLAK */
 .doli-tagline{
   font-size:clamp(14px,1.4vw,18px);
   opacity:.95; color:#171a1f;
 }
-
-/* Social icons footer */
 .doli-social {
   position: absolute;
   left: 50%;
@@ -111,7 +97,6 @@ body.bodylogin {
   margin: 0;
   padding: 0;
 }
-
 .doli-social a {
   display: inline-flex;
   align-items: center;
@@ -121,26 +106,15 @@ body.bodylogin {
   padding: 0;
   border: 0;
 }
-
 .doli-social a img {
   display: block;
   width: 20px;
   height: 20px;
   transition: transform .25s, filter .25s;
 }
-
 .doli-social a img:hover {
   filter: none;
   transform: scale(1.1);
-}
-
-/* On small screens place under logo normally */
-@media (max-width:980px){
-  .doli-social {
-    position: static;
-    transform: none;
-    margin-top: 16px;
-  }
 }
 
 /* Support + copyright under the form (right card) */
@@ -154,14 +128,12 @@ body.bodylogin {
 .doli-support a{color:#0e6ad4;text-decoration:none}
 .doli-support a:hover{text-decoration:underline}
 .doli-support .icon-16{width:16px;height:16px;opacity:.7;flex:0 0 16px}
-
 .sr-only{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0,0,0,0);white-space:nowrap;border:0;
 }
-
 .doli-copy{
-   position:absolute;
+  position:absolute;
   left:50%;
   transform:translateX(-50%);
   bottom:-19px;
@@ -176,38 +148,25 @@ body.bodylogin {
 }
 .doli-copy a{color:#0e6ad4;text-decoration:none}
 .doli-copy a:hover{text-decoration:none}
-
 .doli-copy-logo {
-   height:16px;
+  height:16px;
   width:auto;
   display:inline-block;
   vertical-align:middle;
   margin:0;
   filter:none;
 }
-
-@media (max-width:980px){
-  .doli-copy{
-    position:static;
-    transform:none;
-    margin-top:10px;
-    flex-wrap:wrap;
-    gap:6px;
-  }
-  .doli-copy-logo{height:20px}
-}
 body.login-page{
-    background:url("/dolibarr/public/mybrand/img/background icon.jpg")
-             center no-repeat fixed !important;
-} 
-
+  background:url("/dolibarr/public/mybrand/img/background icon.jpg")
+              center no-repeat fixed !important;
+}
 
 /* ---------- Right panel (login card) ---------- */
 .doli-right{
-    padding-top: 100px;
-	position: relative;
-	display:grid;
-	place-items:center;
+  padding-top: 100px;
+  position: relative;
+  display:grid;
+  place-items:center;
 }
 .doli-card{
   width:78%;
@@ -218,10 +177,10 @@ font-size: 30px;
 padding-left: 30px;
 font-weight: bold;
 }
-.doli-sub{ 
- padding-left: 30px;
-margin-bottom:-48px;color:var(--muted);
-font-weight:500
+.doli-sub{
+  padding-left: 30px;
+  margin-bottom:-48px;color:var(--muted);
+  font-weight:500
 }
 
 /* Form fields */
@@ -234,10 +193,8 @@ font-weight:500
   transition:box-shadow .15s,border-color .15s
 }
 .doli-input:focus{border-color:var(--brand2);box-shadow:0 0 0 6px var(--ring)}
-
 .doli-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
 .doli-remember{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px}
-
 .doli-cta{margin-top:18px}
 .doli-btn{
   width:100%;border:0;padding:11px 18px;border-radius:12px;font-weight:700;font-size:16px;color:#fff;
@@ -246,183 +203,151 @@ font-weight:500
 }
 .doli-btn:hover{filter:saturate(1.05) brightness(1.03);box-shadow:0 14px 28px rgba(17,120,209,.28)}
 .doli-btn:active{transform:translateY(1px)}
-
 .doli-help{margin-top:14px;text-align:center;color:var(--muted);font-size:14px}
 .doli-help a{color:#0e6ad4;text-decoration:none}
 .doli-help a:hover{text-decoration:underline}
 
-/* ---------- Responsive ---------- */
-@media (max-width:980px){
-  .doli-login-shell{grid-template-columns:1fr}
-  .doli-login-shell::before{display:none}
-  .doli-brandmark img{height:90px}
-  .doli-left{min-height:34vh}
-  
-  /* Fix for mobile white space */
-  body.bodylogin {
-    overflow: auto;
-    height: auto;
-    min-height: 100vh;
-  }
-}
-@media (max-width:640px){
-  .brand-header{top:14px;left:16px}
-  .brand-header img{height:36px}
-}
-
-@media (max-width:980px){
-  .doli-login-shell{
-    grid-template-columns:1fr;
-  }
-  .doli-login-shell::before{
-    display:none;
-  }
-
-  .doli-left{
-    min-height:38vh;
-    padding:10vw 6vw 6vw;
-    place-items:center start;
-    text-align:center;
-  }
-  .doli-brandmark img{height:140px}
-}
-
-@media (max-width:640px){
-  .brand-header{top:12px;left:14px}
-  .brand-header img{height:42px}
-
-  .doli-left{
-    padding:16px 20px 26px;
-    min-height:auto;
-  }
-  .doli-brandmark img{height:90px}
-
-  .doli-right{padding:20px}
-  .doli-card{
-    border-radius:14px;
-    padding:24px 18px;
-    width:100%;
-    box-shadow:var(--shadow);
-  }
-
-  .doli-input{padding:14px 16px;font-size:15px}
-  .doli-btn{padding:14px;font-size:16px}
+/* ---------- Responsive Optimizations ---------- */
+@media (max-width: 980px) {
+    .doli-login-shell {
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+    }
+    .doli-login-shell::before {
+        display: none;
+    }
+    .doli-left {
+        min-height: 38vh;
+        padding: 10vw 6vw 6vw;
+        place-items: center;
+        text-align: center;
+    }
+    .doli-left-inner {
+        min-height: auto;
+    }
+    .doli-brandmark img {
+        height: 140px;
+    }
+    .doli-social, .doli-support, .doli-copy {
+        position: static;
+        transform: none;
+        margin: 10px 0 0;
+        flex-wrap: wrap;
+        text-align: center;
+        width: 100%;
+    }
+    .doli-right {
+        padding: 20px;
+        padding-top: 0;
+    }
+    .doli-hello, .doli-sub {
+        padding-left: 0;
+        text-align: center;
+    }
 }
 
-@media (max-width:360px){
-  .doli-brandmark img{height:70px}
-  .doli-hello{font-size:28px}
-  .doli-sub{font-size:15px}
-  .doli-input{font-size:14px}
+@media (max-width: 640px) {
+    .brand-header{
+        top: 12px;
+        left: 14px;
+    }
+    .brand-header img{
+        height: 42px;
+    }
+    .doli-left {
+        padding: 16px 20px 26px;
+    }
+    .doli-brandmark img {
+        height: 90px;
+    }
+    .doli-card{
+        border-radius:14px;
+        padding:24px 18px;
+        width:100%;
+    }
 }
 
-@media (max-width:980px){
-  .doli-support{
-    position:static;
-    transform:none;
-    margin:24px 0 10px;
-    flex-wrap:wrap;
-    text-align:center;
-  }
-
-  .doli-copy{
-    position:static;
-    transform:none;
-    margin:10px 0 0;
-    flex-wrap:wrap;
-    gap:4px;
-    text-align:center;
-  }
-  .doli-copy-logo{height:20px}
+@media (max-width: 360px) {
+    .doli-brandmark img{height: 70px}
+    .doli-hello{font-size:28px}
+    .doli-sub{font-size:15px}
+    .doli-input{font-size:14px}
+    .doli-support, .doli-copy{font-size:12px}
+    .doli-copy-logo{height:16px}
 }
 
-@media (max-width:640px){
-  .doli-support{margin:20px 0 8px;font-size:13px}
-  .doli-copy  {font-size:13px;line-height:1.3}
-  .doli-copy-logo{height:18px}
-}
-
-@media (max-width:360px){
-  .doli-support,.doli-copy{font-size:12px}
-  .doli-copy-logo{height:16px}
-}
-
-/* Force all text to black except specific links */
+/* Generic Styles that should apply at all breakpoints */
 .doli-label,
 .doli-remember span,
 .doli-support span,
 .doli-copy,
 .doli-help,
 .doli-sub {
-
-  color: #000000 !important; /* Force black color */
+  color: #000000 !important;
 }
-
-/* Keep the Contact Support link blue */
 .doli-support a {
-  color: #0e6ad4 !important; /* Keep blue for this specific link */
+  color: #0e6ad4 !important;
 }
-
-/* Make the "Password forgotten?" link black too */
 .doli-row a {
   font-size: 14px;
   color: #000000 !important;
   text-decoration: none;
 }
-
-/* Optional: Make the placeholder text darker */
 .doli-input::placeholder {
   color: #666 !important;
 }
-
 .login {
-    padding-top: 46px;
+  padding-top: 46px;
 }
-
 .doli-copy span {
-margin-bottom: 2px;
   background: linear-gradient(90deg, #00A8B5, blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -moz-background-clip: text; /* Firefox support */
-  -moz-text-fill-color: transparent; /* Firefox support */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
   display: inline-block;
   font-size: 15px;
 }
-
 input:not([type=checkbox], [type=radio]), select, textarea {
-    color: black;
-    height: 35px;
-    margin-bottom: var(--spacing);
+  color: black;
+  height: 35px;
+  margin-bottom: var(--spacing);
 }
 .doli-support .fa-phone {
   color: #000000 !important;
 }
-
-/* Password toggle icon styling */
 .password-toggle {
   position: absolute;
-  right: 14px; /* Aligns with padding of doli-input */
+  right: 14px;
   top: 38%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #000000; /* Matches your black text theme */
+  color: #000000;
   font-size: 16px;
   padding: 5px;
   transition: color 0.15s;
 }
-
 .password-toggle:hover {
-  color: #666; /* Slightly lighter on hover for contrast */
+  color: #666;
 }
-
 .doli-input-wrap {
-  position: relative; /* Ensure this is relative for absolute positioning of the toggle */
+  position: relative;
 }
-
- Ensure the input doesnt overlap with the icon
 .doli-input {
-  padding-right: 44px; /* Extra padding to accommodate the icon */
+  padding-right: 44px;
+}
+.gradient-text {
+  background: linear-gradient(90deg, #00A8B5, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  display: inline-block;
+  font-size: 15px;
+  text-decoration: none;
+}
+.gradient-text:hover {
+  text-decoration: underline;
 }
 </style>
 
@@ -448,13 +373,13 @@ input:not([type=checkbox], [type=radio]), select, textarea {
       </div>
 
       <div class="doli-social">
-        <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
+        <a href="https://www.instagram.com/realcoresolutions/" target="_blank" aria-label="Instagram">
           <img src="/dolibarr/public/mybrand/img/instagram-svgrepo-com.svg" alt="">
         </a>
-        <a href="https://linkedin.com/company/yourpage" target="_blank" aria-label="LinkedIn">
+        <a href="https://www.linkedin.com/company/realcore-solutions/" target="_blank" aria-label="LinkedIn">
           <img src="/dolibarr/public/mybrand/img/linkedin-svgrepo-com.svg" alt="">
         </a>
-        <a href="https://facebook.com/yourpage" target="_blank" aria-label="Facebook">
+        <a href="https://www.facebook.com/realcoresolution/" target="_blank" aria-label="Facebook">
           <img src="/dolibarr/public/mybrand/img/facebook-boxed-svgrepo-com (1).svg" alt="">
         </a>
       </div>
@@ -511,11 +436,9 @@ input:not([type=checkbox], [type=radio]), select, textarea {
         </div>
 
       <div class="doli-copy">
-  &copy; 2025 by <span>Realcore Solutions</span>. All Rights Reserved.
-  <a class="doli-copy-brand" href="https://realcoresolutions.com" target="_blank" rel="noopener">
-    <span class="sr-only"></span>
-  </a>
+  &copy; 2025 by <a href="https://realcoresolutions.com" target="_blank" rel="noopener" class="gradient-text">Realcore Solutions</a>. All Rights Reserved.
 </div>
+
       </form>
     </div>
   <!-- Add the script here -->

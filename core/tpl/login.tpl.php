@@ -220,7 +220,7 @@ print "<!-- BEGIN PHP TEMPLATE LOGIN.TPL.PHP -->\n";
 }
 
 html,body{
-  height:100%;
+ height:100%;
   background:var(--bg);
   color:var(--ink);
   font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif
@@ -276,7 +276,7 @@ html,body{
 /* AMLAK mark */
 .doli-brandmark{margin:8px 0 6px}
 .doli-brandmark img{
-  height:500px; /* tweak as needed; was 500 which overflowed */
+  height:350px; /* tweak as needed; was 500 which overflowed */
   width:auto;max-width:100%;
 }
 
@@ -362,7 +362,6 @@ html,body{
   font-size:14px;
   line-height:1.2;
 }
-.doli-copy a{color:#0e6ad4;text-decoration:none}
 .doli-copy a:hover{text-decoration:none}
 
 .doli-copy-logo {
@@ -587,6 +586,31 @@ html,body{
 .doli-input {
   padding-right: 44px; /* Extra padding to accommodate the icon */
 }
+.doli-date{
+    left: 103px;
+    top: -43px;
+    position: relative;
+    color: #006f6a !important;
+    font-weight: bold !important;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #00A8B5, blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  display: inline-block;
+  font-size: 15px;
+  text-decoration: none; /* Ensure no underline interferes */
+}
+.gradient-text:hover {
+  text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+a {
+    color: black !important;
+}
 </style>
 
 
@@ -623,12 +647,13 @@ $(document).ready(function () {
 
 <div class="doli-login-shell">
 
-	<!-- <div class="brand-header">
-  <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/realcore.png" alt="Realcore Solutions">
-	</div> -->
+	<div class="brand-header">
+<h2><?php echo $langs->trans("Employee Portal"); ?></h2>
+	</div>
 
   <!-- LEFT BRAND PANEL -->
   <section class="doli-left">
+    
     <div class="doli-left-inner">
       <div class="doli-logo">
         <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/realcore.png" alt="Logo">
@@ -649,13 +674,13 @@ if (is_readable($brandLogoPath)) {
 }
 ?>
 	<div class="doli-social">
-  <a href="https://instagram.com/yourpage" target="_blank" aria-label="Instagram">
+  <a href="https://www.instagram.com/realcoresolutions/" target="_blank" aria-label="Instagram">
     <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/instagram-svgrepo-com.svg" alt="">
   </a>
-  <a href="https://linkedin.com/company/yourpage" target="_blank" aria-label="LinkedIn">
+  <a href="https://www.linkedin.com/company/realcore-solutions/" target="_blank" aria-label="LinkedIn">
     <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/linkedin-svgrepo-com.svg" alt="">
   </a>
-  <a href="https://facebook.com/yourpage" target="_blank" aria-label="Facebook">
+  <a href="https://www.facebook.com/realcoresolution/" target="_blank" aria-label="Facebook">
     <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/facebook-boxed-svgrepo-com (1).svg" alt="">
   </a>
 </div>
@@ -668,6 +693,9 @@ if (is_readable($brandLogoPath)) {
     <div class="doli-card">
       <h1 class="doli-hello"><?php echo $langs->trans("Welcome to Employee Portal"); ?></h1>
       <p class="doli-sub"><?php echo $langs->trans("Please Login To Your Account"); ?></p>
+      <p class="doli-date" style="text-align: center; margin: 0 0 22px; color: black; font-weight: 500; font-size: 14px; text-decoration: underline; font-style: italic;">
+      <?php echo $langs->trans(""). dol_print_date(dol_now(), ' %B %d, %Y'); ?>
+    </p>
 
       <form id="login" name="login" method="post" action="<?php echo $php_self; ?>">
         <input type="hidden" name="token" value="<?php echo newToken(); ?>" />
@@ -796,10 +824,7 @@ if (is_readable($brandLogoPath)) {
 </div> -->
 
 <div class="doli-copy">
-  &copy; 2025 by <span>Realcore Solutions</span>. All Rights Reserved.
-  <a class="doli-copy-brand" href="https://realcoresolutions.com" target="_blank" rel="noopener">
-    <span class="sr-only"></span>
-  </a>
+  &copy; 2025 by <a href="https://realcoresolutions.com" target="_blank" rel="noopener" class="gradient-text">Realcore Solutions</a>. All Rights Reserved.
 </div>
 
 
@@ -911,9 +936,6 @@ $result = $hookmanager->executeHooks('getLoginPageExtraContent', $parameters, $d
 print $hookmanager->resPrint;
 
 ?>
-
-
-
 
 </body>
 </html>
