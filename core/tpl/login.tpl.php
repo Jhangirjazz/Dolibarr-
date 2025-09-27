@@ -276,8 +276,9 @@ html,body{
 /* AMLAK mark */
 .doli-brandmark{margin:8px 0 6px}
 .doli-brandmark img{
-  height:350px; /* tweak as needed; was 500 which overflowed */
-  width:auto;max-width:100%;
+  height:150px; /* tweak as needed; was 500 which overflowed */
+  width:auto;
+  /* max-width:100%; */
 }
 
 /* Tagline beneath AMLAK */
@@ -648,7 +649,7 @@ $(document).ready(function () {
 <div class="doli-login-shell">
 
 	<div class="brand-header">
-<h2><?php echo $langs->trans("Employee Portal"); ?></h2>
+<h2><?php echo $langs->trans("Growth ERP"); ?></h2>
 	</div>
 
   <!-- LEFT BRAND PANEL -->
@@ -661,7 +662,7 @@ $(document).ready(function () {
 
 	<?php
 $appTitle = getDolGlobalString('MAIN_APPLICATION_TITLE', 'AMLAK 360');
-$brandLogoRel  = '/public/mybrand/img/Realcore_solution_logo.svg';                // <- put your logo file here
+$brandLogoRel  = '/public/mybrand/img/Realcore logo-02.svg';                // <- put your logo file here
 $brandLogoPath = DOL_DOCUMENT_ROOT.$brandLogoRel;
 
 if (is_readable($brandLogoPath)) {
@@ -693,8 +694,8 @@ if (is_readable($brandLogoPath)) {
     <div class="doli-card">
       <h1 class="doli-hello"><?php echo $langs->trans("Welcome to Employee Portal"); ?></h1>
       <p class="doli-sub"><?php echo $langs->trans("Please Login To Your Account"); ?></p>
-      <p class="doli-date" style="text-align: center; margin: 0 0 22px; color: black; font-weight: 500; font-size: 14px; text-decoration: underline; font-style: italic;">
-      <?php echo $langs->trans(""). dol_print_date(dol_now(), ' %B %d, %Y'); ?>
+      <p class="doli-date" style="text-align: center; margin: 0 0 22px; color: black; font-weight: 500; font-size: 14px;font-style: italic;">
+      <?php echo $langs->trans(""). dol_print_date(dol_now(), '%d/%m/%Y %A'); ?>
     </p>
 
       <form id="login" name="login" method="post" action="<?php echo $php_self; ?>">
@@ -824,10 +825,8 @@ if (is_readable($brandLogoPath)) {
 </div> -->
 
 <div class="doli-copy">
-  &copy; 2025 by <a href="https://realcoresolutions.com" target="_blank" rel="noopener" class="gradient-text">Realcore Solutions</a>. All Rights Reserved.
+  &copy; 2025 by <a href="https://realcoresolutions.com" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
 </div>
-
-
       <?php
         // Error messages, OpenID/Google, MAIN_EASTER_EGG_COMMITSTRIP, MAIN_HTML_FOOTER, hooks...
         // Keep the original blocks from your file below this <form> as-is.

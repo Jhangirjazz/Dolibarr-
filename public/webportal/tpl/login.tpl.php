@@ -80,7 +80,7 @@ body.bodylogin {
 .doli-brandmark img{
   margin-top: 38px;
   height:350px;
-  width:auto;max-width:100%;
+  width:auto;max-width:440px;
 }
 .doli-tagline{
   font-size:clamp(14px,1.4vw,18px);
@@ -369,7 +369,7 @@ input:not([type=checkbox], [type=radio]), select, textarea {
       </div>
 
       <div class="doli-brandmark">
-        <img src="/dolibarr/public/mybrand/img/Realcore_solution_logo.svg" alt="AMLAK 360">
+        <img src="/dolibarr/public/mybrand/img/Realcore logo-02.svg" alt="AMLAK 360">
       </div>
 
       <div class="doli-social">
