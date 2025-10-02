@@ -9,7 +9,7 @@ if (empty($context) || !is_object($context)) {
 
 '@phan-var-force Context $context';
 print '
-<link rel="icon" type="image/x-icon" href="/dolibarr/public/mybrand/img/test.ico">
+<link rel="icon" type="image/x-icon" href="' . DOL_URL_ROOT . '/public/theme/eldy/img/favicon.ico">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
@@ -53,7 +53,7 @@ body.bodylogin {
   content:"";
   position:absolute;
   top:130px;bottom:130px;left:50%;
-  width:2px;background:black;
+  width:1px;background:#ccbebe;
 }
 
 /* ---------- Left panel (AMLAK side) ---------- */
@@ -169,8 +169,8 @@ body.login-page{
   place-items:center;
 }
 .doli-card{
-  width:78%;
-  padding:clamp(24px,4vw,40px);
+  width:70%;
+  // padding:clamp(24px,4vw,40px);
 }
 .doli-hello{margin:0 0 4px;
 font-size: 30px;
@@ -179,7 +179,7 @@ font-weight: bold;
 }
 .doli-sub{
   padding-left: 30px;
-  margin-bottom:-48px;color:var(--muted);
+  color:var(--muted);
   font-weight:500
 }
 
@@ -283,10 +283,11 @@ font-weight: bold;
 .doli-copy,
 .doli-help,
 .doli-sub {
+  margin-left: 0.75rem;
   color: #000000 !important;
 }
 .doli-support a {
-  color: #0e6ad4 !important;
+  color: black !important;
 }
 .doli-row a {
   font-size: 14px;
@@ -297,7 +298,7 @@ font-weight: bold;
   color: #666 !important;
 }
 .login {
-  padding-top: 46px;
+  padding-top: 20px;
 }
 .doli-copy span {
   background: linear-gradient(90deg, #00A8B5, blue);
@@ -349,6 +350,18 @@ input:not([type=checkbox], [type=radio]), select, textarea {
 .gradient-text:hover {
   text-decoration: underline;
 }
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
 </style>
 
 ';
@@ -358,7 +371,9 @@ input:not([type=checkbox], [type=radio]), select, textarea {
     
     <!-- HEADER LOGO (top-left) -->
 	<div class="brand-header">
-  <!-- <img src="/dolibarr/public/mybrand/img/realcore.png" alt="Realcore Solutions"> -->
+    <a href="https://realcoresolutions.com/" target="_blank" rel="noopener noreferrer">
+        <h2><?php echo $langs->trans("Growth ERP"); ?></h2>
+    </a>
 	</div>
 
   <!-- LEFT BRAND PANEL -->
@@ -369,18 +384,26 @@ input:not([type=checkbox], [type=radio]), select, textarea {
       </div>
 
       <div class="doli-brandmark">
-        <img src="/dolibarr/public/mybrand/img/Realcore logo-02.svg" alt="AMLAK 360">
+        <!-- for local host -->
+        <img src="/dolibarr/public/mybrand/img/Realcore logo-02.svg" alt="">
+        <!-- <img src="/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions"> -->
       </div>
 
       <div class="doli-social">
         <a href="https://www.instagram.com/realcoresolutions/" target="_blank" aria-label="Instagram">
-          <img src="/dolibarr/public/mybrand/img/instagram-svgrepo-com.svg" alt="">
+            <!-- for locat host -->
+          <img src="/dolibarr/public/mybrand/img/instagram.svg" alt="">
+          <!-- <img src="/public/mybrand/img/instagram-svgrepo-com.svg" alt=""> -->
         </a>
         <a href="https://www.linkedin.com/company/realcore-solutions/" target="_blank" aria-label="LinkedIn">
-          <img src="/dolibarr/public/mybrand/img/linkedin-svgrepo-com.svg" alt="">
+          <!-- for local host -->
+        <img src="/dolibarr/public/mybrand/img/linkedin.svg" alt="">
+          <!-- <img src="/public/mybrand/img/linkedin-svgrepo-com.svg" alt="Realcore Solutions"> -->
         </a>
         <a href="https://www.facebook.com/realcoresolution/" target="_blank" aria-label="Facebook">
-          <img src="/dolibarr/public/mybrand/img/facebook-boxed-svgrepo-com (1).svg" alt="">
+          <!-- for local host -->
+          <img src="/dolibarr/public/mybrand/img/facebook.svg" alt="">
+          <!-- <img src="/public/mybrand/img/facebook-boxed-svgrepo-com (1).svg" alt="Realcore Solutions"> -->
         </a>
       </div>
 
@@ -418,7 +441,7 @@ input:not([type=checkbox], [type=radio]), select, textarea {
             <input type="checkbox" name="rememberme" value="1">
             <span><?php echo $langs->trans("RememberMe"); ?></span>
           </label>
-          <a href="#"><?php echo $langs->trans("PasswordForgotten"); ?></a>
+          <a href="#"><?php echo $langs->trans("Forgot Password?"); ?></a>
         </div>
 
         <div class="doli-cta">
@@ -435,10 +458,9 @@ input:not([type=checkbox], [type=radio]), select, textarea {
           <span>Need help? <a href="/dolibarr/public/ticket/index.php?entity=1" target="_blank" rel="noopener">Contact Support</a></span>
         </div>
 
-      <div class="doli-copy">
-  &copy; 2025 by <a href="https://realcoresolutions.com" target="_blank" rel="noopener" class="gradient-text">Realcore Solutions</a>. All Rights Reserved.
+<div class="doli-copy">
+  &copy; 2025 by <a href="https://rcs.realcoresolutions.com/" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
 </div>
-
       </form>
     </div>
   <!-- Add the script here -->

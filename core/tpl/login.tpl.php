@@ -212,79 +212,107 @@ print "<!-- BEGIN PHP TEMPLATE LOGIN.TPL.PHP -->\n";
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
-:root{
-  --brand1:#0f8ea8; --brand2:#1178d1;
-  --ink:#171a1f; --muted:#6b7280; --bg:#f7f8fb;
-  --card:#ffffff; --ring:rgba(17,120,209,.18);
-  --shadow:0 10px 30px rgba(0,0,0,.08); --radius:18px;
+:root {
+  --brand1: #0f8ea8;
+  --brand2: #1178d1;
+  --ink: #171a1f;
+  --muted: #6b7280;
+  --bg: #f7f8fb;
+  --card: #ffffff;
+  --ring: rgba(17, 120, 209, .18);
+  --shadow: 0 10px 30px rgba(0, 0, 0, .08);
+  --radius: 18px;
 }
 
-html,body{
- height:100%;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
 /* Page background image */
-.body.bodylogin{
-  background:url('<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/background icon.jpg')
-             center center / cover no-repeat fixed !important;
+.body.bodylogin {
+  background: url('<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/background icon.jpg')
+              center center / cover no-repeat fixed !important;
 }
 
 /* ---------- Header logo (top-left) ---------- */
-.brand-header{position:fixed;top:22px;left:32px;z-index:1000}
-.brand-header img{height:70px;width:auto}
+.brand-header {
+  position: fixed;
+  top: 22px;
+  left: 32px;
+  z-index: 1000;
+}
+.brand-header img {
+  height: 70px;
+  width: auto;
+}
 
 /* ---------- Two-column shell + divider ---------- */
-.doli-login-shell{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  min-height:100dvh;
-  position:relative;
+.doli-login-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100dvh;
+  position: relative;
+  gap: 20px; /* Added for better column separation */
 }
-.doli-login-shell::before{
-  content:"";
-  position:absolute;
-  top:130px;bottom:130px;left:50%;
-  width:2px;background:black;
+.doli-login-shell::before {
+    content: "";
+    position: absolute;
+    top: 130px;
+    bottom: 130px;
+    left: 50%;
+    width: 1px;
+    background: #ccbebe;
+    border-radius: 10px;
 }
 
 /* ---------- Left panel (AMLAK side) ---------- */
-.doli-left{
-  padding:clamp(24px,5vw,56px);
-  display:grid;
-  place-items:center;
-  text-align:center;
-  color:#fff; /* only affects small text you add */
+.doli-left {
+  padding: clamp(20px, 4vw, 48px); /* Adjusted for flexible padding */
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
 }
-.doli-left-inner{
-  max-width:560px;width:100%;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  gap:14px;min-height:60vh;
+.doli-left-inner {
+  max-width: 560px;
+  width: 100%;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 14vh;
 }
 
 /* Make the left section a positioning context */
-.doli-left{ position:relative; }
-
+.doli-left {
+  position: relative;
+}
 
 /* Hide legacy inline logo block above AMLAK text, if present */
-.doli-left .doli-logo{display:none}
+.doli-left .doli-logo {
+  display: none;
+}
 
 /* AMLAK mark */
-.doli-brandmark{margin:8px 0 6px}
-.doli-brandmark img{
-  height:150px; /* tweak as needed; was 500 which overflowed */
-  width:auto;
-  /* max-width:100%; */
+.doli-brandmark {
+  margin: 8px 0 6px;
+}
+.doli-brandmark img {
+  height: 150px;
+  width: auto;
+  max-width: 100%; /* Added to prevent overflow */
 }
 
 /* Tagline beneath AMLAK */
-.doli-tagline{
-  font-size:clamp(14px,1.4vw,18px);
-  opacity:.95; color:#171a1f;
+.doli-tagline {
+  font-size: clamp(14px, 1.4vw, 18px);
+  opacity: .95;
+  color: #171a1f;
 }
 
 /* Social icons footer */
@@ -295,7 +323,7 @@ html,body{
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
-  gap: 6px;        /* <-- minimal gap */
+  gap: 5px; /* Increased for better touch separation */
   margin: 0;
   padding: 0;
 }
@@ -312,8 +340,8 @@ html,body{
 
 .doli-social a img {
   display: block;
-  width: 20px;     /* <-- bigger size */
-  height: 20px;
+  width: clamp(18px, 5vw, 22px); /* Scaled for better visibility */
+  height: clamp(18px, 5vw, 22px);
   transition: transform .25s, filter .25s;
 }
 
@@ -323,7 +351,7 @@ html,body{
 }
 
 /* On small screens place under logo normally */
-@media (max-width:980px){
+@media (max-width: 980px) {
   .doli-social {
     position: static;
     transform: none;
@@ -332,267 +360,355 @@ html,body{
 }
 
 /* Support + copyright under the form (right card) */
-.doli-support{
-  position:absolute;             /* add */
-  left:50%; transform:translateX(-50%);
-  bottom:54px;                   /* sits just above copyright */
-  display:flex; align-items:center; justify-content:center;
-  gap:8px; color:black; font-size:14px
+.doli-support {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: black;
+  font-size: clamp(12px, 3.5vw, 14px); /* Scaled for readability */
+  padding: 0 10px; /* Added to prevent edge clipping */
 }
-.doli-support a{color:#0e6ad4;text-decoration:none}
-.doli-support a:hover{text-decoration:underline}
-.doli-support .icon-16{width:16px;height:16px;opacity:.7;flex:0 0 16px}
-
-.sr-only{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0,0,0,0);white-space:nowrap;border:0;
+.doli-support a {
+  color: #0e6ad4;
+  text-decoration: none;
+}
+.doli-support a:hover {
+  text-decoration: underline;
+}
+.doli-support .icon-16 {
+  width: 16px;
+  height: 16px;
+  opacity: .7;
+  flex: 0 0 16px;
 }
 
-.doli-copy{
-   position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:24px;
-
-  display:flex;                 /* put text + logo on one line */
-  align-items:center;           /* vertically center the logo */
-  justify-content:center;
-  gap:8px;                      /* spacing between chunks */
-  flex-wrap:nowrap;             /* don't wrap on desktop */
-  color:black;
-  font-size:14px;
-  line-height:1.2;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
-.doli-copy a:hover{text-decoration:none}
+
+.doli-copy {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  color: black;
+  font-size: clamp(12px, 3.5vw, 14px); /* Scaled for readability */
+  line-height: 1.2;
+  padding: 0 10px; /* Added to prevent edge clipping */
+}
+.doli-copy a:hover {
+  text-decoration: none;
+}
 
 .doli-copy-logo {
-   height:16px;                  /* try 26–30px to taste */
-  width:auto;
-  display:inline-block;
-  vertical-align:middle;
-  margin:0;                     /* no extra gaps */
-  filter:none; 
+  height: 16px;
+  width: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  filter: none;
 }
 
-@media (max-width:980px){
-  .doli-copy{
-    position:static;
-    transform:none;
-    margin-top:10px;
-    flex-wrap:wrap;             /* allow wrapping on small screens */
-    gap:6px;
+@media (max-width: 980px) {
+  .doli-copy {
+    position: static;
+    transform: none;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 6px;
   }
 }
 
 /* ---------- Right panel (login card) ---------- */
-.doli-right{
-	position: relative;
-	display:grid;
-	place-items:center;
-	/* padding:clamp(24px,5vw,56px) */
+.doli-right {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 3vw, 32px); /* Adjusted for flexibility */
 }
-.doli-card{
-  width:min(560px,100%);
-  border-radius:var(--radius);
-  padding:clamp(24px,4vw,40px);
-  
+.doli-card {
+  width: min(560px, 100%);
+  border-radius: var(--radius);
+  padding: clamp(20px, 3.5vw, 32px); /* Adjusted for smaller screens */
 }
-.doli-hello{
-  margin:0 0 4px;
-  font-size:30px;
+.doli-hello {
+  margin: 0 0 4px;
+  font-size: clamp(24px, 5vw, 30px); /* Scaled for readability */
 }
-.doli-sub{margin:0 0 22px;
-  color:black;
-  font-weight:500}
+.doli-sub {
+  margin: 0 0 8px;
+  color: black;
+  font-weight: 500;
+  text-align: left;
+  font-size: clamp(14px, 3.5vw, 16px); /* Added for scaling */
+}
 
 /* Form fields */
-.doli-field{margin:14px 0 16px}
-.doli-label{display:block;font-size:13px;color:black;margin-bottom:8px}
-.doli-input-wrap{position:relative}
-.doli-input{
-  width:100%;border:1px solid #e5e7eb;border-radius:12px;
-  padding:14px 44px 14px 14px;font-size:16px;outline:none;background:#fff;
-  transition:box-shadow .15s,border-color .15s
+.doli-field {
+  margin: 14px 0 16px;
 }
-.doli-input:focus{border-color:var(--brand2);box-shadow:0 0 0 6px var(--ring)}
-
-.doli-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
-.doli-remember{display:inline-flex;align-items:center;gap:8px;color:black;font-size:14px}
-
-.doli-cta{margin-top:18px}
-.doli-btn{
-  width:100%;border:0;padding:14px 18px;border-radius:12px;font-weight:700;font-size:16px;color:#fff;
-  background-image:linear-gradient(90deg,var(--brand1),var(--brand2));
-  cursor:pointer;box-shadow:0 10px 20px rgba(17,120,209,.25);
-  transition:transform .06s,filter .15s,box-shadow .15s
+.doli-label {
+  padding-left: 0.75rem;
+  display: block;
+  font-size: clamp(12px, 3vw, 13px); /* Scaled for readability */
+  color: black;
+  margin-bottom: 8px;
 }
-.doli-btn:hover{filter:saturate(1.05) brightness(1.03);box-shadow:0 14px 28px rgba(17,120,209,.28)}
-.doli-btn:active{transform:translateY(1px)}
+.doli-input-wrap {
+  position: relative;
+}
+.doli-input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 44px 14px 14px;
+  font-size: clamp(14px, 4vw, 16px); /* Scaled for readability */
+  outline: none;
+  background: #fff;
+  transition: box-shadow .15s, border-color .15s;
+}
+.doli-input:focus {
+  border-color: var(--brand2);
+  box-shadow: 0 0 0 6px var(--ring);
+}
 
-.doli-help{margin-top:14px;text-align:center;color:black;font-size:14px}
-.doli-help a{color:#0e6ad4;text-decoration:none}
-.doli-help a:hover{text-decoration:underline}
+.doli-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+.doli-remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: black;
+  font-size: clamp(12px, 3.5vw, 14px); /* Scaled for readability */
+}
+
+.doli-cta {
+  margin-top: 18px;
+}
+.doli-btn {
+width: 100%;
+  border: 0;
+  padding: clamp(12px, 3vw, 14px);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: clamp(14px, 4vw, 16px);
+  color: #fff;
+  background-image: linear-gradient(90deg, #000D25, royalblue);
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(17, 120, 209, .25);
+  transition: transform .06s, filter .15s, box-shadow .15s;
+}
+.doli-btn:hover {
+ filter: saturate(1.05) brightness(1.03);
+  box-shadow: 0 14px 28px rgba(17, 120, 209, .28);
+}
+.doli-btn:active {
+  transform: translateY(1px);
+}
+
+.doli-help {
+  margin-top: 14px;
+  text-align: center;
+  color: black;
+  font-size: clamp(12px, 3.5vw, 14px); /* Scaled for readability */
+}
+.doli-help a {
+  color: #0e6ad4;
+  text-decoration: none;
+}
+.doli-help a:hover {
+  text-decoration: underline;
+}
 
 /* ---------- Responsive ---------- */
-@media (max-width:980px){
-  .doli-login-shell{grid-template-columns:1fr}
-  .doli-login-shell::before{display:none}
-  .doli-brandmark img{height:90px}
-  .doli-left{min-height:34vh}
-}
-@media (max-width:640px){
-  .brand-header{top:14px;left:16px}
-  .brand-header img{height:36px}
-}
-
-@media (max-width:980px){
-  .doli-login-shell{
-    grid-template-columns:1fr;     /* one column */
+@media (max-width: 980px) {
+  .doli-login-shell {
+    grid-template-columns: 1fr;
+    gap: 10px; /* Added for better spacing */
   }
-  .doli-login-shell::before{
-    display:none;                  /* remove the vertical divider */
+  .doli-login-shell::before {
+    display: none;
   }
-
-  /* Left “brand” panel shrinks to a nice hero banner */
-  .doli-left{
-    min-height:38vh;               /* shorter hero */
-    padding:10vw 6vw 6vw;
-    place-items:center start;      /* center horizontally; start vertically */
-    text-align:center;
+  .doli-brandmark img {
+    height: clamp(80px, 12vw, 100px); /* Adjusted for better scaling */
   }
-  .doli-brandmark img{height:140px}
-
-  /* Social strip drops under the banner automatically (thanks to your flex) */
+  .doli-left {
+    min-height: 28vh; /* Slightly shorter hero */
+    padding: clamp(20px, 5vw, 40px); /* Adjusted for flexibility */
+    place-items: center start;
+    text-align: center;
+  }
 }
 
-
-/* ──────────────────────────────────────────────────────────── */
-/* 3) MOBILE  (≤ 640 px) –  tighter gutters & smaller artwork  */
-/* ──────────────────────────────────────────────────────────── */
-@media (max-width:640px){
-  .brand-header{top:12px;left:14px}
-  .brand-header img{height:42px}
-
-  .doli-left{
-    padding:16px 20px 26px;
-    min-height:auto;
+@media (max-width: 640px) {
+  .brand-header {
+    top: 12px;
+    left: 14px;
+    padding: clamp(10px, 3vw, 12px); /* Adjusted for tighter spacing */
   }
-  .doli-brandmark img{height:90px}
-
-  /* Make the login card breathe but stay edge-to-edge */
-  .doli-right{padding:20px}
-  .doli-card{
-    border-radius:14px;
-    padding:24px 18px;
-    width:100%;
-    box-shadow:var(--shadow);      /* keep the shadow even on phones */
+  .brand-header img {
+    height: clamp(30px, 8vw, 36px); /* Smaller logo */
   }
-
-  /* Inputs: full width & bigger hit area */
-  .doli-input{padding:14px 16px;font-size:15px}
-  .doli-btn{padding:14px;font-size:15px}
+  .doli-left {
+    padding: clamp(15px, 4vw, 20px); /* Tighter padding */
+    min-height: 20vh; /* Shorter hero */
+  }
+  .doli-brandmark img {
+    height: clamp(60px, 10vw, 80px); /* Smaller logo */
+  }
+  .doli-right {
+    padding: clamp(10px, 3vw, 20px); /* Tighter padding */
+  }
+  .doli-card {
+    border-radius: 14px;
+    padding: clamp(16px, 3vw, 20px); /* Tighter padding */
+    width: 100%;
+    box-shadow: var(--shadow);
+  }
+  .doli-input {
+    padding: clamp(10px, 3vw, 12px) clamp(36px, 10vw, 40px) clamp(10px, 3vw, 12px) clamp(12px, 3vw, 14px); /* Adjusted padding */
+    font-size: clamp(14px, 4vw, 15px); /* Adjusted for readability */
+  }
+  .doli-btn {
+    padding: clamp(10px, 3vw, 12px); /* Smaller padding */
+    font-size: clamp(14px, 4vw, 15px); /* Adjusted for readability */
+  }
 }
 
-
-/* ──────────────────────────────────────────────────────────── */
-/* 4) ULTRA-NARROW (≤ 360 px) –  last-ditch tweaks             */
-/* ──────────────────────────────────────────────────────────── */
-@media (max-width:360px){
-  .doli-brandmark img{height:70px}
-  .doli-hello{font-size:28px}
-  .doli-sub{font-size:15px}
-  .doli-input{font-size:14px}
+@media (max-width: 360px) {
+  .doli-brandmark img {
+    height: clamp(50px, 12vw, 60px); /* Smaller logo */
+  }
+  .doli-hello {
+    font-size: clamp(20px, 5vw, 24px); /* Smaller heading */
+  }
+  .doli-sub {
+    font-size: clamp(12px, 3.5vw, 14px); /* Smaller subtitle */
+  }
+  .doli-input {
+    font-size: clamp(12px, 4vw, 14px); /* Smaller input text */
+  }
 }
 
 /* ─────  FOOTER RESPONSIVENESS  ───────────────────────────── */
-
-/* Tablet & smaller (≤ 980 px) – let the footer flow */
-@media (max-width:980px){
-  /* Support strip */
-  .doli-support{
-    position:static;           /* take part in normal flow   */
-    transform:none;
-    margin:24px 0 10px;        /* breathing room             */
-    flex-wrap:wrap;            /* allow line breaks          */
-    text-align:center;
+@media (max-width: 980px) {
+  .doli-support {
+    position: static;
+    transform: none;
+    margin: 24px 0 10px;
+    flex-wrap: wrap;
+    text-align: center;
   }
-
-  /* Copyright strip */
-  .doli-copy{
-    position:static;
-    transform:none;
-    margin:10px 0 0;
-    flex-wrap:wrap;            /* logo + text can wrap       */
-    gap:4px;                   /* tighter gap on small scrn  */
-    text-align:center;
+  .doli-copy {
+    position: static;
+    transform: none;
+    margin: 10px 0 0;
+    flex-wrap: wrap;
+    gap: 4px;
+    text-align: center;
   }
-  .doli-copy-logo{height:20px} /* shrink logo a touch        */
+  .doli-copy-logo {
+    height: 20px;
+  }
 }
 
-/* Phones (≤ 640 px) – tighten a bit more */
-@media (max-width:640px){
-  .doli-support{margin:20px 0 8px;font-size:13px}
-  .doli-copy  {font-size:13px;line-height:1.3}
-  .doli-copy-logo{height:18px}
+@media (max-width: 640px) {
+  .doli-support {
+    margin: 20px 0 8px;
+    font-size: clamp(12px, 3.5vw, 13px); /* Adjusted for readability */
+  }
+  .doli-copy {
+    font-size: clamp(12px, 3.5vw, 13px); /* Adjusted for readability */
+    line-height: 1.3;
+  }
+  .doli-copy-logo {
+    height: clamp(16px, 4vw, 18px); /* Smaller logo */
+  }
 }
 
-/* Ultra-narrow (≤ 360 px) – final tweak */
-@media (max-width:360px){
-  .doli-support,.doli-copy{font-size:12px}
-  .doli-copy-logo{height:16px}
+@media (max-width: 360px) {
+  .doli-support, .doli-copy {
+    font-size: clamp(10px, 3.5vw, 12px); /* Smaller text */
+  }
+  .doli-copy-logo {
+    height: clamp(14px, 4vw, 16px); /* Smaller logo */
+  }
 }
-
-/* .doli-copy span {
-  background: linear-gradient(90deg, var(--brand1), var(--brand2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-} */
 
 .doli-copy span {
   background: linear-gradient(90deg, #00A8B5, blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -moz-background-clip: text; /* Firefox support */
-  -moz-text-fill-color: transparent; /* Firefox support */
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
   display: inline-block;
   font-size: 15px;
 }
 .doli-support .fa-phone {
   color: #000 !important;
-  opacity: 1 !important; /* Match your brand1 color, adjust as needed */
+  opacity: 1 !important;
 }
+
 /* Password toggle icon styling */
 .password-toggle {
   position: absolute;
-  right: 14px; /* Aligns with padding of doli-input */
+  right: clamp(10px, 3vw, 12px); /* Adjusted for smaller screens */
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #6b7280; /* Matches muted color variable */
-  font-size: 16px;
+  color: #6b7280;
+  font-size: clamp(14px, 4vw, 16px); /* Scaled for readability */
   padding: 5px;
   transition: color 0.15s;
 }
 
 .password-toggle:hover {
-  color: #171a1f; /* Darker color on hover */
+  color: #171a1f;
 }
 
 .doli-input-wrap {
-  position: relative; /* Ensure this is relative for absolute positioning of the toggle */
+  position: relative;
 }
 
 /* Ensure the input doesn't overlap with the icon */
 .doli-input {
-  padding-right: 44px; /* Extra padding to accommodate the icon */
+  padding-right: 44px;
 }
-.doli-date{
-    left: 103px;
-    top: -43px;
-    position: relative;
-    color: #006f6a !important;
-    font-weight: bold !important;
+
+.doli-date {
+  text-align: right !important;
+  color: black !important;
+  font-weight: 500 !important;
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  font-size: clamp(12px, 3.5vw, 14px) !important; /* Scaled for readability */
+  font-style: italic !important;
+  padding: 0 !important;
+  margin-right: 0; /* Adjusted to prevent overflow */
 }
 
 .gradient-text {
@@ -603,14 +719,142 @@ html,body{
   -moz-text-fill-color: transparent;
   display: inline-block;
   font-size: 15px;
-  text-decoration: none; /* Ensure no underline interferes */
+  text-decoration: none;
 }
 .gradient-text:hover {
-  text-decoration: underline; /* Optional: Add underline on hover */
+  text-decoration: underline;
 }
 
 a {
-    color: black !important;
+  color: black !important;
+}
+
+/* Mobile responsiveness improvements */
+@media (max-width: 980px) {
+  .brand-header {
+    position: relative;
+    top: auto;
+    left: auto;
+    text-align: center;
+    padding: clamp(10px, 3vw, 15px); /* Adjusted for flexibility */
+  }
+  .brand-header h2 {
+    font-size: clamp(16px, 4vw, 22px); /* Scaled for readability */
+  }
+  .doli-left {
+    min-height: 28vh; /* Adjusted for balance */
+    padding: clamp(20px, 5vw, 30px); /* Tighter padding */
+  }
+  .doli-brandmark img {
+    height: clamp(80px, 12vw, 100px); /* Smaller logo */
+  }
+  .doli-right {
+    padding: clamp(10px, 3vw, 15px); /* Tighter padding */
+  }
+  .doli-card {
+    padding: clamp(16px, 3vw, 20px); /* Adjusted for smaller screens */
+    width: 90%; /* Slightly narrower for margins */
+    margin: 0 auto; /* Center card */
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-header {
+    padding: clamp(8px, 2.5vw, 10px); /* Tighter padding */
+  }
+  .doli-left {
+    padding: clamp(15px, 4vw, 20px); /* Tighter padding */
+    min-height: 20vh; /* Shorter hero */
+  }
+  .doli-brandmark img {
+    height: clamp(60px, 10vw, 80px); /* Smaller logo */
+  }
+  .doli-right {
+    padding: clamp(8px, 2.5vw, 10px); /* Tighter padding */
+  }
+  .doli-hello {
+    font-size: clamp(18px, 5vw, 22px); /* Smaller heading */
+  }
+  .doli-sub {
+    font-size: clamp(12px, 3.5vw, 14px); /* Smaller subtitle */
+  }
+  .doli-input {
+    padding: clamp(10px, 3vw, 12px) clamp(36px, 10vw, 40px) clamp(10px, 3vw, 12px) clamp(12px, 3vw, 14px); /* Adjusted padding */
+    font-size: clamp(14px, 4vw, 15px); /* Adjusted for readability */
+  }
+  .doli-btn {
+    padding: clamp(10px, 3vw, 12px); /* Smaller padding */
+    font-size: clamp(14px, 4vw, 15px); /* Adjusted for readability */
+  }
+  .doli-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .doli-remember {
+    order: 2;
+  }
+  .doli-row a {
+    order: 1;
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .doli-left {
+    min-height: 18vh; /* Shorter hero */
+    padding: clamp(15px, 4vw, 20px); /* Tighter padding */
+  }
+  .doli-brandmark img {
+    height: clamp(50px, 10vw, 60px); /* Smaller logo */
+  }
+  .doli-social a {
+    padding: 6px;
+  }
+  .doli-social a img {
+    width: clamp(16px, 4.5vw, 18px); /* Smaller icons */
+    height: clamp(16px, 4.5vw, 18px);
+  }
+  .doli-hello {
+    font-size: clamp(16px, 5vw, 18px); /* Smaller heading */
+  }
+  .doli-help {
+    font-size: clamp(11px, 3.5vw, 13px); /* Smaller help text */
+  }
+}
+
+/* Ensure CAPTCHA is responsive */
+@media (max-width: 640px) {
+  .doli-field img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Added to prevent inline spacing issues */
+  }
+  input[type="text"].doli-input {
+    font-size: clamp(14px, 4vw, 16px); /* Adjusted to prevent zoom */
+  }
+}
+
+.doli-sub-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(20px, 5vw, 40px); /* Adjusted for flexibility */
+}
+
+/* Adjust the styling for the date and sub-text to fit the new layout */
+.doli-sub {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(12px, 3.5vw, 14px); /* Added for scaling */
+}
+
+.doli-date {
+  margin-right: 80px; /* Adjusted to prevent overflow */
+  color: #006f6a;
+  font-weight: 500;
+  font-size: clamp(12px, 3.5vw, 14px); /* Scaled for readability */
+  font-style: italic;
 }
 </style>
 
@@ -648,10 +892,11 @@ $(document).ready(function () {
 
 <div class="doli-login-shell">
 
-	<div class="brand-header">
-<h2><?php echo $langs->trans("Growth ERP"); ?></h2>
-	</div>
-
+<div class="brand-header">
+    <a href="https://ops.realcoresolutions.com/" target="_blank" rel="noopener noreferrer">
+        <h2><?php echo $langs->trans("Growth ERP"); ?></h2>
+    </a>
+   </div>
   <!-- LEFT BRAND PANEL -->
   <section class="doli-left">
     
@@ -676,13 +921,13 @@ if (is_readable($brandLogoPath)) {
 ?>
 	<div class="doli-social">
   <a href="https://www.instagram.com/realcoresolutions/" target="_blank" aria-label="Instagram">
-    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/instagram-svgrepo-com.svg" alt="">
+    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/instagram.svg" alt="">
   </a>
   <a href="https://www.linkedin.com/company/realcore-solutions/" target="_blank" aria-label="LinkedIn">
-    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/linkedin-svgrepo-com.svg" alt="">
+    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/linkedin.svg" alt="">
   </a>
   <a href="https://www.facebook.com/realcoresolution/" target="_blank" aria-label="Facebook">
-    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/facebook-boxed-svgrepo-com (1).svg" alt="">
+    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/facebook.svg" alt="">
   </a>
 </div>
 
@@ -692,11 +937,13 @@ if (is_readable($brandLogoPath)) {
   <!-- RIGHT FORM CARD -->
   <section class="doli-right">
     <div class="doli-card">
-      <h1 class="doli-hello"><?php echo $langs->trans("Welcome to Employee Portal"); ?></h1>
-      <p class="doli-sub"><?php echo $langs->trans("Please Login To Your Account"); ?></p>
-      <p class="doli-date" style="text-align: center; margin: 0 0 22px; color: black; font-weight: 500; font-size: 14px;font-style: italic;">
-      <?php echo $langs->trans(""). dol_print_date(dol_now(), '%d/%m/%Y %A'); ?>
-    </p>
+
+    <h1 class="doli-hello"><?php echo $langs->trans("Welcome to Employee Portal"); ?></h1>
+<div class="doli-sub-wrap">
+  <p class="doli-sub"><?php echo $langs->trans("Please Login To Your Account"); ?></p>
+  <span class="doli-date"><?php echo dol_print_date(dol_now(), '%d/%m/%Y %A'); ?></span>
+</div>
+
 
       <form id="login" name="login" method="post" action="<?php echo $php_self; ?>">
         <input type="hidden" name="token" value="<?php echo newToken(); ?>" />
@@ -719,7 +966,7 @@ if (is_readable($brandLogoPath)) {
 
         <?php if (!isset($conf->file->main_authentication) || $conf->file->main_authentication != 'googleoauth') { ?>
           <div class="doli-field">
-            <label class="doli-label" for="username"><?php echo $langs->trans("Login"); ?></label>
+            <label class="doli-label" for="username"><?php echo $langs->trans("User name / email"); ?></label>
             <div class="doli-input-wrap">
               <input class="doli-input" type="text" id="username" maxlength="255"
                      placeholder="<?php echo $langs->trans("User Name"); ?>" name="username"
@@ -777,7 +1024,7 @@ if (is_readable($brandLogoPath)) {
             <?php
               $url = DOL_URL_ROOT.'/user/passwordforgotten.php';
               if (getDolGlobalString('MAIN_PASSWORD_FORGOTLINK')) $url = getDolGlobalString('MAIN_PASSWORD_FORGOTLINK');
-              echo '<a href="'.dol_escape_htmltag($url).'">'.$langs->trans("PasswordForgotten").'</a>';
+              echo '<a href="'.dol_escape_htmltag($url).'">'.$langs->trans("Forgot Password?").'</a>';
             ?>
           </div>
 
@@ -813,7 +1060,10 @@ if (is_readable($brandLogoPath)) {
 <div class="doli-support">
   <!-- tiny headset icon (inline SVG so no extra file needed) -->
   <i class="fa-solid fa-phone" style="color:#000000"></i>
-  <span>Need help? <a href="/dolibarr/public/ticket/index.php?entity=1" target="_blank" rel="noopener">Contact Support</a></span>
+   <!-- for local host -->
+  <!-- <span>Need help? <a href="/dolibarr/public/ticket/index.php?entity=1" target="_blank" rel="noopener">Contact Support</a></span> -->
+      <!-- for production -->
+  <span>Need help? <a href="/public/ticket/index.php?entity=1" target="_blank" rel="noopener">Contact Support</a></span>
 </div>
 
 
@@ -825,7 +1075,7 @@ if (is_readable($brandLogoPath)) {
 </div> -->
 
 <div class="doli-copy">
-  &copy; 2025 by <a href="https://realcoresolutions.com" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
+  &copy; 2025 by <a href="https://rcs.realcoresolutions.com/" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
 </div>
       <?php
         // Error messages, OpenID/Google, MAIN_EASTER_EGG_COMMITSTRIP, MAIN_HTML_FOOTER, hooks...

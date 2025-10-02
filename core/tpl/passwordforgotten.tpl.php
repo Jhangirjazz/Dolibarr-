@@ -23,6 +23,8 @@
 if (!defined('NOBROWSERNOTIF')) {
 	define('NOBROWSERNOTIF', 1);
 }
+
+$captcha = ''; 
 /**
  * @var Conf $conf
  * @var DoliDB $db

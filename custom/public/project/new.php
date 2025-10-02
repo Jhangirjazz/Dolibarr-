@@ -180,7 +180,7 @@ function llxHeaderVierge($title, $head = "", $disablejs = 0, $disablehead = 0, $
 /* ———  left column  ——— */
 .contact-left{
     flex:1 1 50%;                      /* NEW – flex-basis 50 % so it can shrink on tablets  */
-    background:url("/dolibarr/custom/mybrand/img/backgroundform.jpg")
+    background:url("/dolibarr/public/mybrand/img/backgroundform.jpg")
               center/cover no-repeat;
     color:#fff;
     padding:40px;
@@ -682,7 +682,7 @@ print '<style>
   .subscriptionformhelptext{ text-align:center!important; }
 
 /* ------------------------------------------------------------------ */
-/*  🔧  EXTRA MOBILE PATCH  •  drop this at the end of the big <style> */
+/*    EXTRA MOBILE PATCH  •  drop this at the end of the big <style> */
 /* ------------------------------------------------------------------ */
 @media (max-width:575px){
 
@@ -713,16 +713,11 @@ div.backgreypublicpayment {
 	background-color: transparent;
     border-bottom: none;
 }
-
-
 </style>';
 
 // print '<br>';
-
-
-
 // path/URL to your logo (SVG/PNG). Put your file in htdocs/custom/... or any public URL.
-$myLogo = DOL_URL_ROOT.'/custom/mybrand/img/realcore.png';
+$myLogo = DOL_URL_ROOT.'/public/mybrand/img/realcore.png';
 print '
 <style>
   /* Left-align the header logo row printed by htmlPrintOnlineHeader() */
