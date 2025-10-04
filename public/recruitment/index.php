@@ -157,6 +157,12 @@ div.backgreypublicpayment{background:transparent;
 /* the table created for each offer */
 #dolpaymenttable{
     /* 2. aesthetics */
+	flex: 1 1 340px;              /* Basis ≈ 340px, grows, shrinks */
+    width: 340px;                 /* Fixed width for uniformity */
+    min-height: 400px;            /* Minimum height to align bottoms */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background:#fff;
     border:1px solid #e5e7eb;      /* subtle outline                         */
     border-radius:18px;
@@ -187,7 +193,7 @@ div.backgreypublicpayment{background:transparent;
 #dolpaymenttable .butAction,
 #dolpaymenttable input[type=submit],
 #dolpaymenttable button{
-    background-image:linear-gradient(90deg,#0f8ea8,#1178d1);
+    background-color: #000D25;
     border:none;
     color:#fff!important;
     font-weight:700;
@@ -217,15 +223,17 @@ div.backgreypublicpayment{background:transparent;
     justify-content:center;
     gap:34px;
     padding:0 24px;
+	max-width: 1200px;            /* Optional: cap the container width */
+    margin: 0 auto;
 }
 
 /* 2) size each #dolpaymenttable card */
-#dolpaymenttable{
-flex: 1 1 340px;              /* Basis≈340px, grows, shrinks */
-width: auto;             /* Never wider than 360px */
-transition: transform .18s, box-shadow .18s;
+#dolpaymenttable {
+    border: 1px solid #dadada;
+    flex: 1 1 340px;
+    width: auto;
+    transition: transform .18s, box-shadow .18s;
 }
-
 /* 3) a pleasant hover lift on large screens only */
 @media(min-width:641px){
   #dolpaymenttable:hover{
@@ -260,7 +268,7 @@ body{background:#f9fafb;}
 /* 1 ▸ let the long texts breathe & align left  */
 .center table#dolpaymenttable .centpercent{
   text-align:center;
-	padding-left: 16px;
+	padding-left: 0px;
     line-height:1.6;
     font-size:16px;
 }
@@ -298,10 +306,6 @@ table#dolpaymenttable > tbody > tr:first-child td{
     flex: 0 0 100%;
 }
 
-.center table#dolpaymenttable .centpercent {
-    margin-left: -18px;
-} 
-
 #tablepublicpayment {
     border: none !important
 }
@@ -317,6 +321,29 @@ h1 {
 
 }
 
+/* Prevent horizontal scrolling */
+body, html {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+.center {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure tables don't cause overflow */
+table#dolpaymenttable {
+    /* max-width: 100%; */
+    table-layout: fixed;
+}
+
+/* Fix any potential padding/margin issues */
+.bodylogin, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
 </style>
 
 <script>
@@ -424,8 +451,8 @@ if (is_array($results)) {
 	} else {
 		print '<br><br><br>';
 		print '<span class="opacitymedium">'.$langs->trans("WeAreRecruiting").'</span>';
-		print '<br><br><br>';
-		print '<br class="hideonsmartphone">';
+		// print '<br><br><br>';
+		// print '<br class="hideonsmartphone">';
 
 		foreach ($results as $job) {
 			$object = $job;

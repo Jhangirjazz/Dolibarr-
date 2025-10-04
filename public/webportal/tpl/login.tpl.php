@@ -8,8 +8,21 @@ if (empty($context) || !is_object($context)) {
 }
 
 '@phan-var-force Context $context';
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/dolibarr/public/mybrand/img/favicon.ico?v=<?php echo time(); ?>">
+</head>
+
+<body class="body bodylogin">
+
+<?php
 print '
-<link rel="icon" type="image/x-icon" href="' . DOL_URL_ROOT . '/public/theme/eldy/img/favicon.ico">
+<link rel="icon" type="image/x-icon" href="' . DOL_URL_ROOT . '/dolibarr/public/mybrand/img/favicon.ico">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
@@ -196,13 +209,50 @@ font-weight: bold;
 .doli-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
 .doli-remember{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px}
 .doli-cta{margin-top:18px}
-.doli-btn{
-  width:100%;border:0;padding:11px 18px;border-radius:12px;font-weight:700;font-size:16px;color:#fff;
-  background-image:linear-gradient(90deg,var(--brand1),var(--brand2));
-  transition:transform .06s,filter .15s,box-shadow .15s
+.doli-btn {
+    width: 100%;
+    border: 0;
+    padding: clamp(14px, 3vw, 12px);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: clamp(15px, 4vw, 17px);
+    color: #ffffff;
+    background: #000D25;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-transform: none;
+    letter-spacing: normal;
+    position: relative;
+    overflow: hidden;
 }
-.doli-btn:hover{filter:saturate(1.05) brightness(1.03);box-shadow:0 14px 28px rgba(17,120,209,.28)}
-.doli-btn:active{transform:translateY(1px)}
+.doli-btn:hover {
+    background: linear-gradient(135deg, #0052A3 0%, #0077E6 100%);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+    transform: translateY(-2px);
+}
+
+.doli-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+}
+
+/* Subtle shine effect on hover */
+.doli-btn::after {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.doli-btn:hover::after {
+    left: 100%;
+}
+
 .doli-help{margin-top:14px;text-align:center;color:var(--muted);font-size:14px}
 .doli-help a{color:#0e6ad4;text-decoration:none}
 .doli-help a:hover{text-decoration:underline}
@@ -287,6 +337,7 @@ font-weight: bold;
   color: #000000 !important;
 }
 .doli-support a {
+
   color: black !important;
 }
 .doli-row a {
@@ -360,6 +411,14 @@ h2 {
     margin-inline-end: 0px;
     font-weight: bold;
     unicode-bidi: isolate;
+    color: #000000 !important;
+}
+
+.fa-phone:before {
+    content: "\f095";
+    position: relative;
+    top: 0px;
+    left: 13px;
 }
 
 </style>
@@ -459,7 +518,7 @@ h2 {
         </div>
 
 <div class="doli-copy">
-  &copy; 2025 by <a href="https://rcs.realcoresolutions.com/" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
+  &copy; 2025 by <a href="https://realcoresolutions.com/" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
 </div>
       </form>
     </div>

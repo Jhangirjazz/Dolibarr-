@@ -508,25 +508,51 @@ html, body {
 .doli-cta {
   margin-top: 18px;
 }
+
 .doli-btn {
-width: 100%;
-  border: 0;
-  padding: clamp(12px, 3vw, 14px);
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: clamp(14px, 4vw, 16px);
-  color: #fff;
-  background-image: linear-gradient(90deg, #000D25, royalblue);
-  cursor: pointer;
-  box-shadow: 0 10px 20px rgba(17, 120, 209, .25);
-  transition: transform .06s, filter .15s, box-shadow .15s;
+    width: 100%;
+    border: 0;
+    padding: clamp(14px, 3vw, 16px);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: clamp(15px, 4vw, 17px);
+    color: #ffffff;
+    background: #000D25;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-transform: none;
+    letter-spacing: normal;
+    position: relative;
+    overflow: hidden;
 }
+
 .doli-btn:hover {
- filter: saturate(1.05) brightness(1.03);
-  box-shadow: 0 14px 28px rgba(17, 120, 209, .28);
+    background: linear-gradient(135deg, #0052A3 0%, #0077E6 100%);
+    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+    transform: translateY(-2px);
 }
+
 .doli-btn:active {
-  transform: translateY(1px);
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+}
+
+/* Subtle shine effect on hover */
+.doli-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.doli-btn:hover::after {
+    left: 100%;
 }
 
 .doli-help {
@@ -893,7 +919,7 @@ $(document).ready(function () {
 <div class="doli-login-shell">
 
 <div class="brand-header">
-    <a href="https://ops.realcoresolutions.com/" target="_blank" rel="noopener noreferrer">
+    <a href="https://realcoresolutions.com/" target="_blank" rel="noopener noreferrer">
         <h2><?php echo $langs->trans("Growth ERP"); ?></h2>
     </a>
    </div>
@@ -1075,7 +1101,7 @@ if (is_readable($brandLogoPath)) {
 </div> -->
 
 <div class="doli-copy">
-  &copy; 2025 by <a href="https://rcs.realcoresolutions.com/" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
+  &copy; 2025 by <a href="https://realcoresolutions.com/" target="_blank" rel="noopener"><img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions" class="doli-copy-logo"></a>. All Rights Reserved.
 </div>
       <?php
         // Error messages, OpenID/Google, MAIN_EASTER_EGG_COMMITSTRIP, MAIN_HTML_FOOTER, hooks...
