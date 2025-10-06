@@ -743,6 +743,29 @@ print '
   body.publicnewmemberform [id*="poweredby"]{
     display:none !important;
   }
+
+@media (max-width: 575px) {
+    #tablesubscribe tr {
+        display: block;
+        width: 100%;
+        /* background-color: red; */
+        background-color: red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+	.publicnewmemberform div.tabBarWithBottom {
+    height: 500px;
+
+	input.minwidth150 {
+            margin-left: -50px;
+            position: relative;
+        top: -17px;
+}
+
+}
+
 </style>
 
 <script>

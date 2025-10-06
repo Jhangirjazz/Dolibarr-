@@ -340,7 +340,7 @@ html, body {
 
 .doli-social a img {
   display: block;
-  width: clamp(18px, 5vw, 22px); /* Scaled for better visibility */
+  width: clamp(18px, 5vw, 18px); /* Scaled for better visibility */
   height: clamp(18px, 5vw, 22px);
   transition: transform .25s, filter .25s;
 }
@@ -510,22 +510,20 @@ html, body {
 }
 
 .doli-btn {
+background: linear-gradient(135deg, #000D25 0%, #1178d1 100%);
     width: 100%;
-    border: 0;
-    padding: clamp(14px, 3vw, 16px);
+    border: none;
+    padding: clamp(14px, 3vw, 12px);
     border-radius: 12px;
     font-weight: 700;
     font-size: clamp(15px, 4vw, 17px);
     color: #ffffff;
-    background: #000D25;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+    box-shadow: 0 6px 20px rgba(17, 120, 209, 0.35);
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-transform: none;
-    letter-spacing: normal;
     position: relative;
     overflow: hidden;
+    letter-spacing: normal;
 }
 
 .doli-btn:hover {
@@ -882,6 +880,9 @@ a {
   font-size: clamp(12px, 3.5vw, 14px); /* Scaled for readability */
   font-style: italic;
 }
+
+
+
 </style>
 
 
@@ -927,9 +928,9 @@ $(document).ready(function () {
   <section class="doli-left">
     
     <div class="doli-left-inner">
-      <div class="doli-logo">
-        <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/realcore.png" alt="Logo">
-      </div>
+    <div class="doli-logo">
+            <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/realcore.png" alt="Realcore Solutions">
+    </div>
 
 	<?php
 $appTitle = getDolGlobalString('MAIN_APPLICATION_TITLE', 'AMLAK 360');
@@ -938,7 +939,9 @@ $brandLogoPath = DOL_DOCUMENT_ROOT.$brandLogoRel;
 
 if (is_readable($brandLogoPath)) {
     echo '<div class="doli-brandmark">
+          <a href="https://realcoresolutions.com/" target="_blank" rel="noopener noreferrer">
             <img src="'.DOL_URL_ROOT.$brandLogoRel.'" alt="'.dol_escape_htmltag($appTitle).'">
+          </a>
           </div>';
 } else {
     // Fallback to text if the image isn’t found
@@ -953,7 +956,7 @@ if (is_readable($brandLogoPath)) {
     <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/linkedin.svg" alt="">
   </a>
   <a href="https://www.facebook.com/realcoresolution/" target="_blank" aria-label="Facebook">
-    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/facebook.svg" alt="">
+    <img src="<?php echo DOL_URL_ROOT; ?>/public/mybrand/img/facebooknew.svg" alt="">
   </a>
 </div>
 

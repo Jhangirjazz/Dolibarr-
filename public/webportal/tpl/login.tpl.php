@@ -209,43 +209,44 @@ font-weight: bold;
 .doli-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px}
 .doli-remember{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px}
 .doli-cta{margin-top:18px}
+
 .doli-btn {
+background: linear-gradient(135deg, #000D25 0%, #1178d1 100%);
     width: 100%;
-    border: 0;
+    border: none;
     padding: clamp(14px, 3vw, 12px);
     border-radius: 12px;
     font-weight: 700;
     font-size: clamp(15px, 4vw, 17px);
     color: #ffffff;
-    background: #000D25;
     cursor: pointer;
-    box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+    box-shadow: 0 6px 20px rgba(17, 120, 209, 0.35);
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    text-transform: none;
-    letter-spacing: normal;
     position: relative;
     overflow: hidden;
+    letter-spacing: normal;
 }
+
 .doli-btn:hover {
-    background: linear-gradient(135deg, #0052A3 0%, #0077E6 100%);
-    box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
+    background: linear-gradient(135deg, #00163f 0%, #1a8ff2 100%);
+    box-shadow: 0 8px 25px rgba(17, 120, 209, 0.55);
     transform: translateY(-2px);
 }
 
 .doli-btn:active {
     transform: translateY(0);
-    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+    box-shadow: 0 4px 12px rgba(17, 120, 209, 0.45);
 }
 
 /* Subtle shine effect on hover */
 .doli-btn::after {
+    content: "";
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
     transition: left 0.6s;
 }
 
@@ -444,8 +445,10 @@ h2 {
 
       <div class="doli-brandmark">
         <!-- for local host -->
+         <a href="https://realcoresolutions.com/" target="_blank" rel="noopener noreferrer">
         <img src="/dolibarr/public/mybrand/img/Realcore logo-02.svg" alt="">
         <!-- <img src="/public/mybrand/img/Realcore logo-02.svg" alt="Realcore Solutions"> -->
+      </a>
       </div>
 
       <div class="doli-social">
@@ -461,7 +464,7 @@ h2 {
         </a>
         <a href="https://www.facebook.com/realcoresolution/" target="_blank" aria-label="Facebook">
           <!-- for local host -->
-          <img src="/dolibarr/public/mybrand/img/facebook.svg" alt="">
+          <img src="/dolibarr/public/mybrand/img/facebooknew.svg" alt="">
           <!-- <img src="/public/mybrand/img/facebook-boxed-svgrepo-com (1).svg" alt="Realcore Solutions"> -->
         </a>
       </div>
