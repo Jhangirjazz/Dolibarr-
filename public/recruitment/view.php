@@ -38,6 +38,7 @@ if (!defined('NOBROWSERNOTIF')) {
 
 // Load Dolibarr environment
 require '../../main.inc.php';
+require_once DOL_DOCUMENT_ROOT.'/core/lib/files.lib.php';
 require_once DOL_DOCUMENT_ROOT.'/recruitment/class/recruitmentjobposition.class.php';
 require_once DOL_DOCUMENT_ROOT.'/recruitment/class/recruitmentcandidature.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/CMailFile.class.php';
@@ -159,6 +160,9 @@ if ($action == "dosubmit") {	// Test on permission not required here (anonymous 
 	if (!$error) {	// Test on permission not required here (anonymous action protected by mitigation of /public/... urls)
 		$candidature = new RecruitmentCandidature($db);
 
+		$candidature->fk_recruitmentjobposition = $object->id;
+
+		// Fill candidate data
 		$candidature->firstname = GETPOST('firstname', 'alpha');
 		$candidature->lastname = GETPOST('lastname', 'alpha');
 		$candidature->email = GETPOST('email', 'alpha');
@@ -166,7 +170,14 @@ if ($action == "dosubmit") {	// Test on permission not required here (anonymous 
 		$candidature->date_birth = GETPOST('birthday', 'alpha');
 		$candidature->requestedremuneration = GETPOST('requestedremuneration', 'alpha');
 		$candidature->description = GETPOST('message', 'alpha');
-		$candidature->fk_recruitmentjobposition = $object->id;
+
+		// Fill extrafields
+		$extrafields->fetch_name_optionals_label($candidature->table_element);
+		$ret = $extrafields->setOptionalsFromPost(null, $candidature);
+		if ($ret < 0) {
+			$error++;
+			$errmsg .= $candidature->error;
+		}
 
 		$candidature->ip = getUserRemoteIP();
 
@@ -178,30 +189,46 @@ if ($action == "dosubmit") {	// Test on permission not required here (anonymous 
 			$errmsg .= implode('<br>', $candidature->errors);
 		}
 
-		// Fill array 'array_options' with data from add form
-		$extrafields->fetch_name_optionals_label($candidature->table_element);
-		$ret = $extrafields->setOptionalsFromPost(null, $candidature);
-		if ($ret < 0) {
-			$error++;
-			$errmsg .= $candidature->error;
-		}
-
 		if (!$error) {
+			// Step 1: Create candidate to get reference number
 			$result = $candidature->create($user);
 			if ($result <= 0) {
 				$error++;
 				$errmsg .= implode('<br>', $candidature->errors);
 			}
 		}
+
 		if (!$error) {
-			$candidature->validate($user);
+			// Step 2: Handle file upload with candidate reference
+			if (isset($_FILES['cv_file']) && $_FILES['cv_file']['error'] == 0) {
+				$upload_dir = $conf->recruitment->dir_output . '/candidatures/' . dol_sanitizeFileName($candidature->ref);
+				dol_mkdir($upload_dir);
+
+				$original_filename = dol_sanitizeFileName($_FILES['cv_file']['name']);
+				$dest_path = $upload_dir . '/' . $original_filename;
+
+				if (dol_move_uploaded_file($_FILES['cv_file']['tmp_name'], $dest_path, 1, 0, 0, 0)) {
+					// Update candidate with CV filename
+					$candidature->array_options['options_cv'] = $original_filename;
+					$candidature->update($user);
+				} else {
+					$error++;
+					$errmsg .= 'Error uploading CV file.<br>';
+				}
+			}
+		}
+
+		if (!$error) {
+			// Step 3: Validate candidate
+			$result = $candidature->validate($user);
 			if ($result <= 0) {
 				$error++;
 				$errmsg .= implode('<br>', $candidature->errors);
 			}
 		}
-	}
+	} // End of if (!$error) for candidate creation
 
+	// COMMIT OR ROLLBACK
 	if (!$error) {
 		$db->commit();
 		setEventMessages($langs->trans("RecruitmentCandidatureSaved"), null);
@@ -273,7 +300,7 @@ div.backgreypublicpayment {
 
 print '<span id="dolpaymentspan"></span>'."\n";
 print '<div class="center">'."\n";
-print '<form id="dolpaymentform" class="center" name="paymentform" action="'.$_SERVER["PHP_SELF"].'" method="POST">'."\n";
+print '<form id="dolpaymentform" class="center" name="paymentform" action="'.$_SERVER["PHP_SELF"].'" method="POST" enctype="multipart/form-data">'."\n";
 print '<input type="hidden" name="token" value="'.newToken().'">'."\n";
 print '<input type="hidden" name="action" value="dosubmit">'."\n";
 print '<input type="hidden" name="tag" value="'.GETPOST("tag", 'alpha').'">'."\n";
@@ -457,6 +484,11 @@ if ($action != 'dosubmit') {
 		print '<tr><td class="titlefieldcreate left">'.$langs->trans("Message").'</td><td class="left">';
 		print '<textarea class="flat quatrevingtpercent" rows="'.ROWS_5.'" name="message">'.$message.'</textarea>';
 		print '</td></tr>'."\n";
+
+		print '<tr><td class="titlefieldcreate left">'.$langs->trans("UploadCV").'</td><td class="left">';
+		print '<input type="file" name="cv_file" class="flat minwidth300">';
+		print '</td></tr>'."\n";
+
 
 		print '<tr><td colspan=2>';
 		print $form->buttonsSaveCancel('Submit', 'Cancel');

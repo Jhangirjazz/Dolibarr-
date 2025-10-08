@@ -33,6 +33,7 @@ require_once DOL_DOCUMENT_ROOT.'/recruitment/class/recruitmentjobposition.class.
 require_once DOL_DOCUMENT_ROOT.'/recruitment/class/recruitmentcandidature.class.php';
 require_once DOL_DOCUMENT_ROOT.'/recruitment/lib/recruitment_recruitmentcandidature.lib.php';
 
+
 /**
  * @var Conf $conf
  * @var DoliDB $db
@@ -534,7 +535,72 @@ if ($object->id > 0 && (empty($action) || ($action != 'edit' && $action != 'crea
 	// Other attributes. Fields from hook formObjectOptions and Extrafields.
 	include DOL_DOCUMENT_ROOT.'/core/tpl/extrafields_view.tpl.php';
 
-	print '</table>';
+	// Display CV file
+print 'Debug: options_cv = ' . (isset($object->array_options['options_cv']) ? $object->array_options['options_cv'] : 'Not set') . '<br>';
+// Display CV file
+print '<tr class="oddeven">';
+print '<td>' . $langs->trans("Files") . '</td>';
+print '<td>';
+
+$formfile = new FormFile($db);
+$basepath = str_replace('/', '\\', $conf->recruitment->dir_output) . '\\candidatures\\';
+$filepath = $basepath . $object->ref; // Default to current ref
+$relativepath = 'candidatures\\' . $object->ref;
+
+// Prioritize provisional ref if in draft or ref is provisional
+if ($object->status == RecruitmentCandidature::STATUS_DRAFT || preg_match('/^[\(]?PROV/i', $object->ref)) {
+    $provisionalref = dol_sanitizeFileName($object->ref);
+    $provisionalpath = $basepath . $provisionalref;
+    if (is_dir($provisionalpath)) {
+        $filepath = $provisionalpath;
+        $relativepath = 'candidatures\\' . $provisionalref;
+    } else {
+        dol_syslog("Provisional path $provisionalpath not found or not a directory", LOG_WARNING);
+    }
+} elseif ($object->status >= RecruitmentCandidature::STATUS_VALIDATED) {
+    // Use validated ref
+    $filepath = $basepath . $object->ref;
+    $relativepath = 'candidatures\\' . $object->ref;
+}
+
+// Debug information - temporary
+print '<div style="background:#f0f0f0; padding:5px; margin:5px 0; font-size:12px;">';
+print '<strong>Debug:</strong> Base Path: ' . $basepath . '<br>';
+print 'Object Ref: ' . $object->ref . '<br>'; // Show current ref for clarity
+print 'Final Path: ' . $filepath . '<br>';
+print 'Directory exists: ' . (is_dir($filepath) ? 'YES' : 'NO') . '<br>';
+if (is_dir($filepath)) {
+    $files = scandir($filepath);
+    $files = array_diff($files, array('.', '..'));
+    print 'Files found: ' . (empty($files) ? 'None' : implode(', ', $files)) . '<br>';
+} else {
+    print 'No directory found. Possible permission issue or path mismatch.<br>';
+}
+print 'Status: ' . $object->status . '<br>'; // Add status for debugging
+print '</div>';
+
+// List of documents
+$filearray = dol_dir_list($filepath, "files", 0, '', '(\.meta|_preview.*\.png)$', 'name', SORT_ASC, 1);
+
+if (count($filearray)) {
+    foreach ($filearray as $file) {
+        $fileurl = DOL_URL_ROOT . '/document.php?modulepart=recruitment&file=' . urlencode(str_replace('\\', '/', $relativepath) . '/' . $file['name']) . '&entity=' . $conf->entity;
+        print '<a href="' . $fileurl . '" target="_blank">';
+        print img_picto('', $file['name']) . ' ' . dol_escape_htmltag($file['name']);
+        print '</a>';
+        print ' <span class="opacitymedium">(' . dol_print_size($file['size']) . ')</span>';
+        print '<br>';
+    }
+} else {
+    print $langs->trans("NoFile");
+    if (!empty($object->array_options['options_cv'])) {
+        print '<br><span class="opacitymedium">Stored filename: ' . $object->array_options['options_cv'] . '</span>';
+    } else {
+        print '<br><span class="opacitymedium">No stored filename.</span>';
+    }
+}
+print '</td></tr>';
+print '</table>';
 	print '</div>';
 	print '</div>';
 

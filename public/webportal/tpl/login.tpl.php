@@ -301,6 +301,8 @@ background: linear-gradient(135deg, #000D25 0%, #1178d1 100%);
     .brand-header{
         top: 12px;
         left: 14px;
+        position: relative;
+        text-align: center;
     }
     .brand-header img{
         height: 42px;
