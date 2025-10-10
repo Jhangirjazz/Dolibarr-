@@ -82,6 +82,8 @@ include DOL_DOCUMENT_ROOT.'/core/actions_fetchobject.inc.php'; // Must be 'inclu
 
 if ($id > 0 || !empty($ref)) {
 	$upload_dir = $conf->recruitment->multidir_output[$object->entity ? $object->entity : $conf->entity]."/recruitmentcandidature/".get_exdir(0, 0, 0, 1, $object);
+    // Corrected to match view.php upload path
+    $upload_dir = $conf->recruitment->multidir_output[$object->entity ? $object->entity : $conf->entity]."/candidatures/".dol_sanitizeFileName($object->ref);
 }
 
 // Security check - Protection if external user
@@ -106,6 +108,7 @@ include DOL_DOCUMENT_ROOT.'/core/actions_linkedfiles.inc.php';
  */
 
 $form = new Form($db);
+$formfile = new FormFile($db); // Initialize FormFile object
 
 $title = $object->ref." - ".$langs->trans('Files');
 $help_url = '';
@@ -198,6 +201,14 @@ if ($object->id) {
 
 	$relativepathwithnofile = 'recruitmentcandidature/'.dol_sanitizeFileName($object->ref).'/';
 	$savingdocmask = dol_sanitizeFileName($object->ref).'-__file__';
+
+    // Add showdocuments to display files from the correct directory
+    $relativepath = 'candidatures/'.dol_sanitizeFileName($object->ref);
+    $filedir = $conf->recruitment->multidir_output[$object->entity ? $object->entity : $conf->entity]."/candidatures/".dol_sanitizeFileName($object->ref);
+    $urlsource = $_SERVER["PHP_SELF"]."?id=".$object->id;
+    $genallowed = $user->hasRight('recruitment', 'recruitmentjobposition', 'read');
+    $delallowed = $user->hasRight('recruitment', 'recruitmentjobposition', 'write');
+    print $formfile->showdocuments($modulepart, $relativepath, $filedir, $urlsource, $genallowed, $delallowed, $object->model_pdf, 1, 0, 0, 28, 0, '', '', '', $langs->defaultlang);
 
 	include DOL_DOCUMENT_ROOT.'/core/tpl/document_actions_post_headers.tpl.php';
 } else {

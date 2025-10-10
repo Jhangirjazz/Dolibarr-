@@ -578,18 +578,22 @@ public function validate($user, $notrigger = 0)
             $this->oldref = $this->ref;
 
             if (preg_match('/^[\(]?PROV/i', $this->ref)) {
-                // Rename physical directory
+                // Safe rename with error suppression for non-numeric warnings
                 $oldref = dol_sanitizeFileName($this->ref);
                 $newref = dol_sanitizeFileName($num);
-                $dirsource = $conf->recruitment->dir_output.'/candidatures/'.$oldref; // Corrected path
-                $dirdest = $conf->recruitment->dir_output.'/candidatures/'.$newref; // Corrected path
+                $dirsource = $conf->recruitment->dir_output.'/candidatures/'.$oldref;
+                $dirdest = $conf->recruitment->dir_output.'/candidatures/'.$newref;
+
+                // Suppress warnings temporarily during file operations
+                error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 
                 if (file_exists($dirsource)) {
                     dol_syslog(get_class($this)."::validate() rename dir ".$dirsource." into ".$dirdest);
                     if (@rename($dirsource, $dirdest)) {
-                        // Update ECM files if needed
+                        // Update ECM files if needed (cast entity to int for safety)
+                        $entityInt = (int) $conf->entity;
                         $sql = 'UPDATE '.MAIN_DB_PREFIX."ecm_files SET filepath = 'candidatures/".$this->db->escape($newref)."'";
-                        $sql .= " WHERE filepath = 'candidatures/".$this->db->escape($oldref)."' AND entity = ".$conf->entity;
+                        $sql .= " WHERE filepath = 'candidatures/".$this->db->escape($oldref)."' AND entity = ".$entityInt;
                         $resql = $this->db->query($sql);
                         if (!$resql) {
                             $error++;
@@ -603,6 +607,9 @@ public function validate($user, $notrigger = 0)
                     $this->errors[] = "Source directory $dirsource does not exist";
                     $error++;
                 }
+
+                // Restore error reporting
+                error_reporting(E_ALL);
             }
         }
     }
